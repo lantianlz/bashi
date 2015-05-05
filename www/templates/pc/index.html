@@ -2,1141 +2,290 @@
 
 {% block title_all %}巴适二手车{% endblock %}
 {% block home_css %}
-<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/fullpage/jquery.fullPage.css" />
-<!-- <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/site/index.css?v={{MEDIA_VERSION}}" /> -->
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}js/dropkick/css/dropkick.css" />
 <style type="text/css">
-body{
-    transition: background-color 1s ease-in-out;
-    background-color: #F38349;
+.bg{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    /*min-height: 600px;*/
 }
 
-#fullPage-nav li{
-    margin: 15px;
-}
-
-#fullPage-nav li a, .fullPage-slidesNav li a{
-    color: #ffffff;
-}
-
-#fullPage-nav li .active span, .fullPage-slidesNav .active span{
-    background-color: #ffffff;
-}
-
-#fullPage-nav span, .fullPage-slidesNav span{
-    border: 1px solid #ffffff;
-    width: 13px;
-    height: 13px;
-}
-
-.sprite-car{
-    -webkit-transform: translateX(0%);
-       -moz-transform: translateX(0%);
-        -ms-transform: translateX(0%);
-            transform: translateX(0%);
-    -webkit-animation: car-move 20s linear infinite;
-       -moz-animation: car-move 20s linear infinite;
-        -ms-animation: car-move 20s linear infinite;
-            animation: car-move 20s linear infinite;
-}
-
-@-webkit-keyframes car-move{
-    0%{
-        -webkit-transform: translateX(-100%);
-        opacity: 0;
-    }
-    10%{
-        -webkit-transform: translateX(-50%);
-        opacity: 1;
-    }
-    90%{
-        -webkit-transform: translateX(400%);
-        opacity: 1;
-    }
-    100%{
-        -webkit-transform: translateX(450%);
-        opacity: 0;
-    }
-}
-@keyframes car-move{
-    0%{
-        -webkit-transform: translateX(-100%);
-           -moz-transform: translateX(-100%);
-            -ms-transform: translateX(-100%);
-                transform: translateX(-100%);
-        opacity: 0;
-    }
-    10%{
-        -webkit-transform: translateX(-50%);
-           -moz-transform: translateX(-50%);
-            -ms-transform: translateX(-50%);
-                transform: translateX(-50%);
-        opacity: 1;
-    }
-    90%{
-        -webkit-transform: translateX(400%);
-           -moz-transform: translateX(400%);
-            -ms-transform: translateX(400%);
-                transform: translateX(400%);
-        opacity: 1;
-    }
-    100%{
-        -webkit-transform: translateX(450%);
-           -moz-transform: translateX(450%);
-            -ms-transform: translateX(450%);
-                transform: translateX(450%);
-        opacity: 0;
-    }
-}
-
-.float-cloud{
-    -webkit-transform: translateX(0%);
-       -moz-transform: translateX(0%);
-        -ms-transform: translateX(0%);
-            transform: translateX(0%);
-    -webkit-animation: float-cloud 60s linear infinite;
-       -moz-animation: float-cloud 60s linear infinite;
-        -ms-animation: float-cloud 60s linear infinite;
-            animation: float-cloud 60s linear infinite;
-}
-
-@-webkit-keyframes float-cloud{
-    0%{
-        -webkit-transform: translateX(0%);
-    }
-    50%{
-        -webkit-transform: translateX(100%);
-    }
-    100%{
-        -webkit-transform: translateX(0%);
-    }
-}
-@keyframes float-cloud{
-    0%{
-        -webkit-transform: translateX(0%);
-           -moz-transform: translateX(0%);
-            -ms-transform: translateX(0%);
-                transform: translateX(0%);
-    }
-    50%{
-        -webkit-transform: translateX(100%);
-           -moz-transform: translateX(100%);
-            -ms-transform: translateX(100%);
-                transform: translateX(100%);
-    }
-    100%{
-        -webkit-transform: translateX(0%);
-           -moz-transform: translateX(0%);
-            -ms-transform: translateX(0%);
-                transform: translateX(0%);
-    }
-}
-
-.float-cloud2{
-    -webkit-transform: translateX(0%);
-       -moz-transform: translateX(0%);
-        -ms-transform: translateX(0%);
-            transform: translateX(0%);
-    -webkit-animation: float-cloud2 20s linear infinite;
-       -moz-animation: float-cloud2 20s linear infinite;
-        -ms-animation: float-cloud2 20s linear infinite;
-            animation: float-cloud2 20s linear infinite;
-}
-
-@-webkit-keyframes float-cloud2{
-    0%{
-        -webkit-transform: translateX(-10%);
-    }
-    50%{
-        -webkit-transform: translateX(10%);
-    }
-    100%{
-        -webkit-transform: translateX(-10%);
-    }
-}
-@keyframes float-cloud2{
-    0%{
-        -webkit-transform: translateX(-10%);
-           -moz-transform: translateX(-10%);
-            -ms-transform: translateX(-10%);
-                transform: translateX(-10%);
-    }
-    50%{
-        -webkit-transform: translateX(10%);
-           -moz-transform: translateX(10%);
-            -ms-transform: translateX(10%);
-                transform: translateX(10%);
-    }
-    100%{
-        -webkit-transform: translateX(-10%);
-           -moz-transform: translateX(-10%);
-            -ms-transform: translateX(-10%);
-                transform: translateX(-10%);
-    }
-}
-
-.flash-cloud-line1{
-    -webkit-animation: flash-cloud-line1 1.5s linear infinite;
-       -moz-animation: flash-cloud-line1 1.5s linear infinite;
-        -ms-animation: flash-cloud-line1 1.5s linear infinite;
-            animation: flash-cloud-line1 1.5s linear infinite;
-}
-
-@-webkit-keyframes flash-cloud-line1{
-    0%{
-        opacity: 0;
-    }
-    33%{
-        opacity: 1;
-    }
-    66%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-@keyframes flash-cloud-line1{
-    0%{
-        opacity: 0;
-    }
-    33%{
-        opacity: 1;
-    }
-    66%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-
-.flash-cloud-line2{
-    -webkit-animation: flash-cloud-line2 1.5s linear infinite;
-       -moz-animation: flash-cloud-line2 1.5s linear infinite;
-        -ms-animation: flash-cloud-line2 1.5s linear infinite;
-            animation: flash-cloud-line2 1.5s linear infinite;
-}
-
-@-webkit-keyframes flash-cloud-line2{
-    0%{
-        opacity: 0;
-    }
-    33%{
-        opacity: 0;
-    }
-    66%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-@keyframes flash-cloud-line2{
-    0%{
-        opacity: 0;
-    }
-    33%{
-        opacity: 0;
-    }
-    66%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-
-.fadeInRightSmall {
-  -webkit-animation-name: fadeInRightSmall;
-  animation-name: fadeInRightSmall;
-}
-
-@-webkit-keyframes fadeInRightSmall {
-  0% {
+.bg-img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    -webkit-transform: translate3d(30%, 0, 0);
-    transform: translate3d(30%, 0, 0);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
 }
 
-@keyframes fadeInRightSmall {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(30%, 0, 0);
-    transform: translate3d(30%, 0, 0);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+.evaluate－form{
+    width: 400px; 
+    height: 350px; 
+    z-index: 100;
+    position: relative;
+    color: #222;
+    padding: 30px 40px;
+}
+.evaluate－cover{
+    position: absolute;
+    z-index: 99;
+    left: 60px;
+    top: 0;
+    width: 400px; 
+    height: 350px; 
+    background-color: #ffffff; 
+    opacity: 0.5; 
+    border-radius: 4px;
+    border: solid 1px #ddd;
+    /*box-shadow: 0px 0px 10px #ffffff;*/
 }
 
-.fadeInLeftSmall {
-  -webkit-animation-name: fadeInLeftSmall;
-  animation-name: fadeInLeftSmall;
+.dropkick-sel{
+    /*color: #bbb;*/
+    font-size: 13px;
 }
 
-@-webkit-keyframes fadeInLeftSmall {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(-30%, 0, 0);
-    transform: translate3d(-30%, 0, 0);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+.dk-select, .dk-select-multi{
+    width: 100%;
 }
 
-@keyframes fadeInLeftSmall {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(-30%, 0, 0);
-    transform: translate3d(-30%, 0, 0);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+.list-group-item:first-child{
+    border-top: 0;
+}
+.list-group-item{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
-.sun{
-    -webkit-animation: sun 8s linear infinite;
-       -moz-animation: sun 8s linear infinite;
-        -ms-animation: sun 8s linear infinite;
-            animation: sun 8s linear infinite;
-}
-
-@-webkit-keyframes sun{
-    0%{
-        -webkit-transform: rotateZ(0deg);
-    }
-    100%{
-        -webkit-transform: rotateZ(-360deg);
-    }
-}
-@keyframes sun{
-    0%{
-        -webkit-transform: rotateZ(0deg);
-           -moz-transform: rotateZ(0deg);
-            -ms-transform: rotateZ(0deg);
-                transform: rotateZ(0deg);
-    }
-    100%{
-        -webkit-transform: rotateZ(-360deg);
-           -moz-transform: rotateZ(-360deg);
-            -ms-transform: rotateZ(-360deg);
-                transform: rotateZ(-360deg);
-    }
-}
-
-.car-zoom{
-    -webkit-transform: scale(0.8);
-       -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-            transform: scale(0.8);
-}
-.car-zoom-effect{
-    -webkit-animation: car-zoom-effect 4s ease-in-out;
-       -moz-animation: car-zoom-effect 4s ease-in-out;
-        -ms-animation: car-zoom-effect 4s ease-in-out;
-            animation: car-zoom-effect 4s ease-in-out;
-}
-
-@-webkit-keyframes car-zoom-effect{
-    0%{
-        bottom: 10%;
-        transform: scale(0.8);
-    }
-    100%{
-        bottom: 10%;
-        transform: scale(1.1);
-    }
-
-    /*0%{
-        transform: translateX(0px) rotate(0deg);
-    }
-    10%{
-        transform: translateX(0.5px) rotate(0.2deg);
-    }
-    20%{
-        transform: translateX(-0.5px) rotate(-0.2deg);
-    }
-    30%{
-        transform: translateX(0.5px) rotate(0.3deg);
-    }
-    40%{
-        transform: translateX(-0.5px) rotate(-0.3deg);
-    }
-    50%{
-        transform: translateX(0.5px) rotate(0.2deg);
-    }
-    60%{
-        transform: translateX(-0.5px) rotate(-0.2deg);
-    }
-    70%{
-        transform: translateX(0.5px) rotate(0.3deg);
-    }
-    80%{
-        transform: translateX(-0.5px) rotate(-0.3deg);
-    }
-    90%{
-        transform: translateX(0.5px) rotate(0.2deg);
-    }
-    100%{
-        transform: translateX(-0.5px) rotate(-0.2deg);
-    }*/
-}
-@keyframes car-zoom-effect{
-    0%{
-        bottom: 10%;
-        -webkit-transform: scale(0.8);
-           -moz-transform: scale(0.8);
-            -ms-transform: scale(0.8);
-                transform: scale(0.8);
-    }
-    100%{
-        bottom: 10%;
-        -webkit-transform: scale(1.1);
-           -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-                transform: scale(1.1);
-    }
-}
-
-.shake-effect1{
-    -webkit-animation: shake-effect 1.5s linear 1s;
-}
-@-webkit-keyframes shake-effect{
-    0%{
-        transform: translateX(0px) rotate(0deg);
-    }
-    10%{
-        transform: translateX(0.1px) rotate(0.1deg);
-    }
-    20%{
-        transform: translateX(-0.1px) rotate(-0.1deg);
-    }
-    30%{
-        transform: translateX(0.3px) rotate(0.2deg);
-    }
-    40%{
-        transform: translateX(-0.3px) rotate(-0.2deg);
-    }
-    50%{
-        transform: translateX(0.5px) rotate(0.3deg);
-    }
-    60%{
-        transform: translateX(-0.5px) rotate(-0.3deg);
-    }
-    70%{
-        transform: translateX(0.3px) rotate(0.2deg);
-    }
-    80%{
-        transform: translateX(-0.3px) rotate(-0.2deg);
-    }
-    90%{
-        transform: translateX(0.1px) rotate(0.1deg);
-    }
-    100%{
-        transform: translateX(-0.1px) rotate(-0.1deg);
-    }
-}
-
-.fade-text{
+.scroll-list{
     overflow: hidden;
-    vertical-align: top;
-    height: 40px;
-    font-weight: bold;
-    display: inline-block;
+    height: 200px;
 }
-
-.blue-circle{
-    background-color: #406EBB;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-}
-
-.blue-line1{
-    background-color: #406EBB; 
-    height: 12px; 
-    width: 100px;
-    top: 59%;
-    left: 52%;
-    -webkit-transform: rotateZ(15deg);
-       -moz-transform: rotateZ(15deg);
-        -ms-transform: rotateZ(15deg);
-            transform: rotateZ(15deg);
-}
-
-.blue-line2{
-    background-color: #406EBB; 
-    height: 12px; 
-    width: 100px;
-    top: 40%;
-    left: 48%;
-    -webkit-transform: rotateZ(291deg);
-       -moz-transform: rotateZ(291deg);
-        -ms-transform: rotateZ(291deg);
-            transform: rotateZ(291deg);
-}
-
-.blue-line3{
-    background-color: #406EBB; 
-    height: 12px; 
-    width: 100px;
-    top: 40%;
-    left: 39%;
-    -webkit-transform: rotateZ(219deg);
-       -moz-transform: rotateZ(219deg);
-        -ms-transform: rotateZ(219deg);
-            transform: rotateZ(219deg);
-}
-
-.blue-line4{
-    background-color: #406EBB; 
-    height: 12px; 
-    width: 100px;
-    top: 70%;
-    left: 39%;
-    -webkit-transform: rotateZ(141deg);
-       -moz-transform: rotateZ(141deg);
-        -ms-transform: rotateZ(141deg);
-            transform: rotateZ(141deg);
-}
-
-.blue-line5{
-    background-color: #406EBB; 
-    height: 12px; 
-    width: 100px;
-    top: 70%;
-    left: 48.5%;
-    -webkit-transform: rotateZ(75deg);
-       -moz-transform: rotateZ(75deg);
-        -ms-transform: rotateZ(75deg);
-            transform: rotateZ(75deg);
-}
-
-.contact-hover-email{
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.contact-hover-email:hover{
-    color: #4675CC;
-    background-color: #ffffff;
-}
-
-.contact-hover-qq{
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.contact-hover-qq:hover{
-    color: #189BD6;
-    background-color: #ffffff;
-}
-
-.contact-hover-weibo{
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.contact-hover-weibo:hover{
-    color: #E6162D;
-    background-color: #ffffff;
-}
-
-.contact-hover-weixin{
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.contact-hover-weixin:hover{
-    color: #25A210;
-    background-color: #ffffff;
-}
-
 </style>
 {% endblock %}
 
 {% block home_js %}
-<script type="text/javascript" src="{{MEDIA_URL}}js/jquery/jquery.fullPage.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/dropkick/dropkick.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery/jquery.easing.1.3.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
 
-    var resetAllStyle = function(){
-            // 重置所有样式
-            $('.text2').css({'opacity': 0});
-            $('.text3').css({'opacity': 0});
-            $('.text4').css({'opacity': 0});
-            $('.text5').css({'opacity': 0});
-            $('.text6').css({'opacity': 0});
-            $('.text7').css({'opacity': 0});
-            $('.text8').css({'opacity': 0});
-            $('.text9').css({'opacity': 0});
-            $('.text10').css({'opacity': 0});
-            $('.text11').css({'opacity': 0});
-            $('.text12').css({'opacity': 0});
-            $('.car1').css({
-                'bottom': '10%',
-                '-webkit-transform': 'scale(0.8)', 
-                '   -moz-transform': 'scale(0.8)', 
-                '    -ms-transform': 'scale(0.8)', 
-                '        transform': 'scale(0.8)'
-            });
-            $('.car2').css({
-                'bottom': '10%',
-                '-webkit-transform': 'scale(0.8)', 
-                '   -moz-transform': 'scale(0.8)', 
-                '    -ms-transform': 'scale(0.8)', 
-                '        transform': 'scale(0.8)'
-            });
-            $('.car3').css({
-                'bottom': '10%',
-                '-webkit-transform': 'scale(0.8)', 
-                '   -moz-transform': 'scale(0.8)', 
-                '    -ms-transform': 'scale(0.8)', 
-                '        transform': 'scale(0.8)'
-            });
-            $('.car4').css({'opacity': 0});
-            $('.phone').css({'opacity': 0});
+    var count = 0;
 
-            if($.browser.msie){
-                return;
-            }
-            $('.blue-circle1')
-            .animate({'left': '56%', 'top': '54%'}, 500);
+    window.setInterval(function(){
+        $('.bg-img').eq(count).animate({'opacity': 0}, 500);
 
-            $('.blue-circle2')
-            .animate({'left': '50%', 'top': '23%'}, 500);
+        count = (count >= 3) ? -1 : count;
+        count += 1;
 
-            $('.blue-circle3')
-            .animate({'left': '39%', 'top': '29%'}, 500);
+        $('.bg-img').eq(count).animate({'opacity': 1}, 500);
 
-            $('.blue-circle4')
-            .animate({'left': '39%', 'top': '65%'}, 500);
+    }, 5000);
+    
 
-            $('.blue-circle5')
-            .animate({'left': '50%', 'top': '72%'}, 500);
+    $('.dropkick-sel').dropkick();
 
-        },
-        pageTransform = function(index){
+    // 无限滚动
+    window.setInterval(function(){
+        var target = $('.scroll-list'),
+            scrollTop = target.children().eq(0).outerHeight();
 
-            resetAllStyle();
+        target
+        .animate({'scrollTop': scrollTop}, 1000, 'easeInOutQuad', function(){
+            target.append(target.children().eq(0));
+            target.scrollTop(0);
+        })
+    }, 2000);
 
-            switch(index){
-                case 1:
-                    $('body').css({'background': '#F38349'});
-
-                    $('.text2').removeClass('bounceIn');
-                    window.setTimeout(function(){
-                        $('.text2').addClass('bounceIn').css({'opacity': 1});
-                    }, 500);
-
-                    $('.text3').css({'opacity': 0});
-                    window.setTimeout(function(){
-                        $('.text3').animate({'opacity': 1}, 1000);
-                    }, 1500);
-
-                    $('.car1').removeClass('car-zoom-effect');
-                    $('.car1>img').removeClass('shake-effect');
-                    window.setTimeout(function(){
-                        $('.car1')
-                        .addClass('car-zoom-effect')
-                        .css({
-                            'bottom': '10%',
-                            '-webkit-transform': 'scale(1.1)', 
-                            '   -moz-transform': 'scale(1.1)', 
-                            '    -ms-transform': 'scale(1.1)', 
-                            '        transform': 'scale(1.1)'
-                        });
-
-                        $('.car1>img').addClass('shake-effect');
-                    }, 1200);
-
-                    $('.car2').removeClass('car-zoom-effect');
-                    $('.car2>img').removeClass('shake-effect');
-                    window.setTimeout(function(){
-                        $('.car2')
-                        .addClass('car-zoom-effect')
-                        .css({
-                            'bottom': '10%',
-                            '-webkit-transform': 'scale(1.1)', 
-                            '   -moz-transform': 'scale(1.1)', 
-                            '    -ms-transform': 'scale(1.1)', 
-                            '        transform': 'scale(1.1)'
-                        });
-
-                        $('.car2>img').addClass('shake-effect');
-                    }, 400);
-
-                    $('.car3').removeClass('car-zoom-effect');
-                    $('.car3>img').removeClass('shake-effect');
-                    window.setTimeout(function(){
-                        $('.car3')
-                        .addClass('car-zoom-effect')
-                        .css({
-                            'bottom': '10%',
-                            '-webkit-transform': 'scale(1.1)', 
-                            '   -moz-transform': 'scale(1.1)', 
-                            '    -ms-transform': 'scale(1.1)', 
-                            '        transform': 'scale(1.1)'
-                        });
-
-                        $('.car3>img').addClass('shake-effect');
-                    }, 800);
-                    break;
-
-                case 2:
-                    $('body').css({'background': '#2abcd6'});
-
-                    $('.text4').removeClass('fadeInUp');
-                    window.setTimeout(function(){
-                        $('.text4').addClass('fadeInUp').css({'opacity': 1});
-                    }, 500);
-
-                    $('.text5').removeClass('fadeInUp');
-                    window.setTimeout(function(){
-                        $('.text5').addClass('fadeInUp').css({'opacity': 1});
-                    }, 1000);
-
-                    $('.car4').removeClass('fadeInRight');
-                    window.setTimeout(function(){
-                        $('.car4').addClass('fadeInRight').css({'opacity': 1});
-                    }, 1500);
-
-                    $('.phone').removeClass('fadeInLeftSmall');
-                    window.setTimeout(function(){
-                        $('.phone').addClass('fadeInLeftSmall').css({'opacity': 1});
-                    }, 1500);
-                    break;
-
-                case 3:
-                    $('body').css({'background': '#C252F3'});
-
-                    $('.text6').removeClass('fadeInRightSmall');
-                    window.setTimeout(function(){
-                        $('.text6').addClass('fadeInRightSmall').css({'opacity': 1});
-                    }, 500);
-
-                    $('.text7').removeClass('fadeInRightSmall');
-                    window.setTimeout(function(){
-                        $('.text7').addClass('fadeInRightSmall').css({'opacity': 1});
-                    }, 700);
-
-                    $('.car5').css({'left': '50%', 'opacity': 0});
-                    window.setTimeout(function(){
-                        $('.car5').animate({'left': '70%', 'opacity': 1}, 2500, 'easeOutQuart');
-                    }, 500);
-
-                    $('.sun').css({'left': '65%', 'opacity': 0});
-                    window.setTimeout(function(){
-                        $('.sun').animate({'left': '55%', 'opacity': 1}, 2500, 'easeOutQuart');
-                    }, 500);
-
-                    break;
-
-                case 4:
-                    $('body').css({'background': '#90C461'});
-
-                    $('.text8').removeClass('fadeInDown');
-                    window.setTimeout(function(){
-                        $('.text8').addClass('fadeInDown').css({'opacity': 1});
-                    }, 500);
-
-                    $('.text9').removeClass('fadeInUp');
-                    window.setTimeout(function(){
-                        $('.text9').addClass('fadeInUp').css({'opacity': 1});
-                    }, 1000);
-
-                    $('.text10').removeClass('fadeInUp');
-                    window.setTimeout(function(){
-                        $('.text10').addClass('fadeInUp').css({'opacity': 1});
-                    }, 1500);
-
-                    break;
-
-                case 5:
-                    $('body').css({'background': '#4675CC'});
-
-                    $('.text11').removeClass('fadeIn');
-                    window.setTimeout(function(){
-                        $('.text11').addClass('fadeIn').css({'opacity': 1});
-                    }, 1500);
-
-                    $('.text12').removeClass('fadeIn');
-                    window.setTimeout(function(){
-                        $('.text12').addClass('fadeIn').css({'opacity': 1});
-                    }, 1000);
-                    
-
-                    if($.browser.msie){
-                        return;
-                    }
-                    window.setTimeout(function(){
-
-                        $('.blue-circle1')
-                        .css({'left': '56%', 'top': '54%'})
-                        .animate({'left': '59%', 'top': '55%'}, 1000, 'easeOutElastic');
-
-                        $('.blue-circle2')
-                        .css({'left': '50%', 'top': '23%'})
-                        .animate({'left': '52%', 'top': '15%'}, 1000, 'easeOutElastic');
-
-                        $('.blue-circle3')
-                        .css({'left': '39%', 'top': '29%'})
-                        .animate({'left': '36%', 'top': '21%'}, 1000, 'easeOutElastic');
-
-                        $('.blue-circle4')
-                        .css({'left': '39%', 'top': '65%'})
-                        .animate({'left': '36%', 'top': '74%'}, 1000, 'easeOutElastic');
-
-                        $('.blue-circle5')
-                        .css({'left': '50%', 'top': '72%'})
-                        .animate({'left': '52%', 'top': '82%'}, 1000, 'easeOutElastic');
-
-                    }, 10);
-
-                    break;
-
-                case 6:
-                    $('body').css({'background': '#4675CC'});
-                    break;
-            }
-        };
-
-    $('#fullpage').fullpage({
-        scrollingSpeed: 700,
-        easing: 'easeOutExpo',
-        navigation: true,
-        anchors: ['homepage', 'service', 'use', 'q&a', 'about'],
-        onLeave: function(index, nextIndex, direction){
-            $('.navbar-right>li').removeClass('active');
-            $('.navbar-right>li').eq(nextIndex-1).addClass('active');
-
-            pageTransform(nextIndex);
-            
-        }
+    // 估价
+    $('.btn-evaluate').bind('click', function(e){
+        e.preventDefault();
+        $('.evaluate-result').prev().addClass('none');
+        $('.evaluate-result').removeClass('none');
+        // $('body').scrollTop(5000);
+        $('body').animate({'scrollTop': 600}, 500);
     });
-
-    pageTransform(1);
-
-    // IE下第五屏
-    if($.browser.msie){
-        $('.IE-only').prev().addClass('none');
-        $('.IE-only').removeClass('none');
-    }
-    
-
-    // 移动的车
-    // $.Global.Animation.SpriteAnimation('.sprite-car', {imgSrc: '{{MEDIA_URL}}img/sprite-plane.png', height: 89});
-
-
-
-    // 文字效果切换
-    // var WORDS = [
-    //         ['inventors', 'use of the data', 'rebuilding the relationship', 'man to the vehicle'],
-    //         ['engineers', 'use tech power', 'improve traffic flow', 'thousands of users'],
-    //         ['supporters of the Open', 'share data', 'allow as many', 'create their own services'],
-    //         ['pleased to meet you', 'you are, contact us', 'we can chat', 'rain and shine'],
-    //         ['human beings', 'use transport', 'get to work', 'early'],
-    //         ['geeks', 'devour books of sci -fi', 'imagine the future', 'mobility']
-    //     ],
-    //     getWordWidth = function(word){
-    //         var temp = $('<span style="font-weight: bold; visibility: hidden;">'+word+'</span>').appendTo('.fade-move'),
-    //             width = temp.width();
-
-    //         temp.remove();
-    //         return width;
-    //     },
-    //     fadeText = function(words){
-    //         $.each(words, function(i){
-
-    //             $('.fade-text').eq(i)
-    //             .animate({
-    //                 'opacity': 0,
-    //                 'width': getWordWidth(words[i])
-    //             }, 500, 'easeOutExpo', function(){
-                    
-    //                 $(this).text(words[i]);
-    //                 $(this).animate({
-    //                     'opacity': 1
-    //                 }, 500, 'easeInExpo');
-
-    //             });
-
-    //         });
-    //     },
-    //     loopFadeText = function(){
-    //         $.each(WORDS, function(i){
-
-    //             window.setTimeout(function(){
-
-    //                 fadeText(WORDS[i]);
-
-    //             }, i*4000);
-                
-    //         });
-    //     };
-
-    // window.setInterval(function(){
-    //     loopFadeText();
-    // }, WORDS.length * 4000)
-    
-    // loopFadeText();
-
-
-
-
 });
 
 </script>
 {% endblock %}
 
 {% block base_container %}
-<div id="fullpage">
 
-    <div class="section pr">
-        <!-- <div class="sprite-car"></div> -->
-        <div class="container pr-50 pl-60 pt-30 co-ffffff text-center">
-            <div style="padding-right: 350px;">
-                <img class="float-cloud" src="{{MEDIA_URL}}img/home/cloud.png">
-            </div>
-            <div class="pt-10">
-                <span class="f25 text1">全球最大汽车服务平台</span>
-            </div>
-            <div class="pb-15 pt-15">
-                <!-- <span class="text2 f60 fb animated">巴适二手车来了</span> -->
-                <img class="text2 w240" src="{{MEDIA_URL}}img/home/bashilaile.png">
-            </div>
-            <div class="pt-3">
-                <span class="f14 text3">集汽车快修美容服务、互联网线上社交、汽车服务体验店于一身， </span>
-            </div>
-            <div class="pt-3">
-                <span class="f14 text3">将爱车的小咖大咖们聚集起来，感受互联网时代汽车服务带来的便利。</span>
-            </div>
-            <div class="pt-3">
-                <span class="f14 text3">这一切，只为生活更美好！</span>
-            </div>
-
-            <div class="pr" style="min-height: 200px;">
-                <img class="pa" style="bottom: 0; left: 12%; width: 800px;" src="{{MEDIA_URL}}img/home/land.png">
-                <span class="pa car1 car-zoom" style="bottom: 10%; left: 25%;">
-                    <img style="width: 125px;" src="{{MEDIA_URL}}img/home/car1.png">
-                </span>
-                <span class="pa car2 car-zoom" style="bottom: 10%; left: 42%; width: 160px;">
-                    <img style="width: 160px;" src="{{MEDIA_URL}}img/home/car2.png">
-                </span>
-                <span class="pa car3 car-zoom" style="bottom: 10%; left: 62%; width: 135px;">
-                    <img style="width: 135px;" src="{{MEDIA_URL}}img/home/car3.png">
-                </span>
-            </div>
-        </div>
+<div class="container-fluid pl-0 pr-0" style="">
+    <div class="bg">
+        <img class="bg-img" style="opacity: 1;" src="{{MEDIA_URL}}img/banner1.jpg">
+        <img class="bg-img" src="{{MEDIA_URL}}img/banner2.jpg">
+        <img class="bg-img" src="{{MEDIA_URL}}img/banner3.jpg">
+        <img class="bg-img" src="{{MEDIA_URL}}img/banner4.jpg">
     </div>
+</div>
 
-    <div class="section">
-        <!-- <div class="container text-center f25 co-ffffff fade-move">
-            <span class="">We are</span>
-            <span class="fade-text">pleased to meet you</span>
-            <span class="">who</span>
-            <span class="fade-text">you are, contact us</span>
-            <br>
-            <span class="">to</span>
-            <span class="fade-text">we can chat</span>
-            <span class="">for</span>
-            <span class="fade-text">rain and shine</span>
-        </div> -->
-
-        <div class="container pr-50 pl-60 pt-50 co-ffffff text-center">
-            <div class="pb-20 f25 text4 animated">
-                互联网＋实体店全方位服务，享受汽车大咖体验
+<div class="container-fluid pl-0 pr-0 pa" style="left: 0; top: 20%; width: 100%;">
+    <div class="container pr-50 pl-60 pr">
+        <div class="evaluate－cover"></div>
+        <div class="evaluate－form">
+            <div class="f20">二手车估价</div>
+            <div class="pt-20 co-777777">
+                选择车型
             </div>
-            <div class="f14 text5 animated">
-                线上，将爱车用户聚集在一起，聊车聊生活，提供全面的互联网汽车服务
-            </div>
-            <div class="f14 text5 animated">
-                在线下，巴适二手车汽车快修连锁，让你体验不一样的实体店服务
-            </div>
-
-            <div class="pr" style="min-height: 320px;">
-                <img class="pa" style="bottom: 15%; left: 24%; width: 550px;" src="{{MEDIA_URL}}img/home/building.png">
-                <img class="pa animated fadeInLeftSmall phone" style="bottom: 0; left: 30%; width: 130px;" src="{{MEDIA_URL}}img/home/phone.png">
-                <img class="pa" style="bottom: 13%; left: 44%; width: 35px;" src="{{MEDIA_URL}}img/home/house1.png">
-                <img class="pa" style="bottom: 4%; left: 55%; width: 65px;" src="{{MEDIA_URL}}img/home/house1.png">
-                <img class="pa" style="bottom: 14%; left: 71%; width: 25px;" src="{{MEDIA_URL}}img/home/house2.png">
-                <img class="pa car4 animated" style="bottom: 4%; left: 63%; width: 55px;" src="{{MEDIA_URL}}img/home/car4.png">
-                <img class="pa" style="bottom: 27%; left: 44.4%; width: 25px;" src="{{MEDIA_URL}}img/home/cloud1.png">
-                <img class="pa flash-cloud-line1" style="bottom: 25%; left: 45%; width: 13px;" src="{{MEDIA_URL}}img/home/cloud-line1.png">
-                <img class="pa flash-cloud-line2" style="bottom: 24%; left: 44.7%; width: 20px;" src="{{MEDIA_URL}}img/home/cloud-line2.png">
-                <img class="pa" style="bottom: 28%; left: 56%; width: 45px;" src="{{MEDIA_URL}}img/home/cloud1.png">
-                <img class="pa flash-cloud-line1" style="bottom: 25.6%; left: 57.2%; width: 19px;" src="{{MEDIA_URL}}img/home/cloud-line1.png">
-                <img class="pa flash-cloud-line2" style="bottom: 24.5%; left: 56.7%; width: 30px;" src="{{MEDIA_URL}}img/home/cloud-line2.png">
-                <img class="pa" style="bottom: 24.5%; left: 71.2%; width: 20px;" src="{{MEDIA_URL}}img/home/cloud1.png">
-                <img class="pa flash-cloud-line1" style="bottom: 22.8%; left: 71.6%; width: 12px;" src="{{MEDIA_URL}}img/home/cloud-line1.png">
-                <img class="pa flash-cloud-line2" style="bottom: 22%; left: 71.3%; width: 18px;" src="{{MEDIA_URL}}img/home/cloud-line2.png">
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container pr-50 pl-60 pt-50 co-ffffff">
-            <div class="row">
-                <div class="col-md-6 pr" style="min-height: 250px;">
-                    <img class="pa" style="bottom: 20%; right: 10%; width: 230px;" src="{{MEDIA_URL}}img/home/map.png">
-                    <img class="pa" style="bottom: 30%; left: 55%; width: 150px;" src="{{MEDIA_URL}}img/home/location.png">
-                    <!-- <img class="pa" style="bottom: 80%; left: 50%; width: 80px;" src="{{MEDIA_URL}}img/home/cloud2.png"> -->
-                    <img class="pa car5" style="bottom: 30%; left: 50%; width: 100px;" src="{{MEDIA_URL}}img/home/car5.png">
-                    <img class="pa sun" style="bottom: 85%; left: 55%; width: 50px;" src="{{MEDIA_URL}}img/home/sun.png">
-                    <img class="pa cloud4" style="bottom: 80%; left: 50%; width: 80px;" src="{{MEDIA_URL}}img/home/cloud4.png">
+            <div class="pt-5 row">
+                <div class="col-md-6">
+                    <select class="dropkick-sel">
+                        <option value="0">请选择品牌</option>
+                        <option value="1">奔驰</option>
+                    </select>
                 </div>
-                <div class="col-md-6 pt-30">
-                    <div class="f25 animated text6">
-                        全国服务联网
-                    </div>
-                    <div class="mb-20 f25 animated text6">
-                        美容快修超简单
-                    </div>
-                    <div class="f14 animated text7">
-                        巴适二手车快修美容连锁，统一化管理和标准化服务的实体旗舰店
-                    </div>
-                    <div class="f14 animated text7">
-                        24小时守护，终身会员全国享受
-                    </div>
+                <div class="col-md-6">
+                    <select class="dropkick-sel">
+                        <option value="0">请选择车型</option>
+                        <option value="1">奔驰S级</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pt-15">
+                <select class="dropkick-sel">
+                    <option value="0">请选择车款</option>
+                    <option value="1">600L</option>
+                </select>
+            </div>
+            <div class="pt-15 co-777777">
+                上牌时间
+            </div>
+            <div class="pt-5 row">
+                <div class="col-md-6">
+                    <select class="dropkick-sel">
+                        <option value="0">请选择上牌年份</option>
+                        <option value="1">2015 年</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select class="dropkick-sel">
+                        <option value="0">请选择上牌月份</option>
+                        <option value="12">12 月</option>
+                        <option value="11">11 月</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pt-15 co-777777">
+                行驶里程
+            </div>
+            <div class="pt-5 row">
+                <div class="col-md-6 pr">
+                    <input id="distance" class="form-control input-sm" type="text" style="font-size: 13px; border-radius:0;" />
+                    <label for="distance" class="pa" style="color: #777; right: 20px; top: 7px; font-size: 13px; font-weight: normal;">万公里</label>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" style="border-radius:0;" class="btn btn-sm btn-primary btn-block f13 btn-evaluate">开  始  估  价</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="section">
-        <div class="container pr-50 pl-60 pt-50 co-ffffff">
-            <div class="row">
-                <div class="col-md-6 text-right">
-                    <div class="f25 animated text8">
-                        众筹投资模式
-                    </div>
-                    <div class="f25 animated text8 mb-20">
-                        降低风险，保障利益
-                    </div>
-                    <div class="f14 animated text9 mt-10">
-                        前所未有的投资形式
-                    </div>
-                    <div class="f14 animated text9">
-                        巴适二手车采用众筹模式，分摊风险的同时最大化提升收益
-                    </div>
-                    <div class="f14 animated text10 mt-15">
-                        一次投资，终身收益
-                    </div>
-                    <div class="f14 animated text10">
-                        您将成为巴适二手车的终身会员，享受免费汽车服务
-                    </div>
-                </div>
-                <div class="col-md-6 pr" style="min-height: 250px;">
-                    <img class="pa float-cloud2" style="top: -6%; left: 10%; width: 250px;" src="{{MEDIA_URL}}img/home/cloud3.png">
-                    <img class="pa" style="top: 51%; left: 30%; width: 150px;" src="{{MEDIA_URL}}img/home/car6.png">
-                    <img class="pa" style="top: 35%; left: 40%; width: 40px;" src="{{MEDIA_URL}}img/home/hat.png">
-                    <img class="pa" style="top: 6%; left: 13%; width: 180px;" src="{{MEDIA_URL}}img/home/circle.png">
-                    <img class="pa" style="top: 27%; left: 10%; width: 140px;" src="{{MEDIA_URL}}img/home/money.png">
-                </div>
-            </div>
+<div class="container pr-50 pl-60 pb-20 pt-50">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="f20">第三方估值平台</div>
+            <div class="co-bbbbbb">公正透明独立第三方评估服务平台</div>
+        </div>
+        <div class="col-md-4">
+            <div class="f20">先进估价模型</div>
+            <div class="co-bbbbbb">采用业内先进二手车评估车辆保值率模型</div>
+        </div>
+        <div class="col-md-4">
+            <div class="f20">海量车源数据</div>
+            <div class="co-bbbbbb">每日追踪分析全网二手车海量交易价格</div>
         </div>
     </div>
+</div>
 
-    <div class="section">
-        <div class="container pr-50 pl-60 pt-50 co-ffffff text-center">
-            <div class="mb-20 f25 text12 animated">
-                基于互联网的汽车服务O2O，颠覆传统业态
+<div class="container pr-50 pl-60 pb-20">
+    <div class="pr-50 pl-50 row">
+        <div class="col-md-7">
+            <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">
+                <span>评估车源总量:<span class="co-66afe9 pl-10">5897万辆</span></span>
+                <span class="pl-15">估价准确率:<span class="co-66afe9 pl-10">95.7%</span></span>
             </div>
-            <div class="text11 f14 animated">
-                全新商业模式，将移动互联网与传统汽车服务相结合
-            </div>
-            <div class="text11 f14 animated">
-                让用户紧密联系起来，提供更具价值的汽车后服务
-            </div>
-
-            <div class="pr" style="min-height: 350px;">
-                
-                <div class="pa blue-line1"></div>
-                <div class="pa blue-line2"></div>
-                <div class="pa blue-line3"></div>
-                <div class="pa blue-line4"></div>
-                <div class="pa blue-line5"></div>
-
-                <div class="pa" style="top: 40%; left: 46%; background-color: #406EBB; width: 115px; height: 115px; border-radius: 50%;">
-                    <img class="pa" style="bottom: 32%; right: 16%; width: 70px;" src="{{MEDIA_URL}}img/home/logo.png">
-                </div>
-                <div class="pa blue-circle blue-circle1" style="top: 54%; left: 56%;">
-                    <img class="pa" style="bottom: 20%; right: 24%; width: 30px;" src="{{MEDIA_URL}}img/home/pic1.png">
-                </div>
-                <div class="pa blue-circle blue-circle2" style="top: 23%; left: 50%;">
-                    <img class="pa" style="bottom: 15%; right: 25%; width: 30px;" src="{{MEDIA_URL}}img/home/pic2.png">
-                </div>
-                <div class="pa blue-circle blue-circle3" style="top: 29%; left: 39%;">
-                    <img class="pa" style="bottom: 12%; right: 26%; width: 30px;" src="{{MEDIA_URL}}img/home/pic3.png">
-                </div>
-                <div class="pa blue-circle blue-circle4" style="top: 72%; left: 36%;">
-                    <img class="pa" style="bottom: 15%; right: 25%; width: 30px;" src="{{MEDIA_URL}}img/home/pic4.png">
-                </div>
-                <div class="pa blue-circle blue-circle5" style="top: 72%; left: 50%;">
-                    <img class="pa" style="bottom: 18%; right: 22%; width: 33px;" src="{{MEDIA_URL}}img/home/pic5.png">
-                </div>
-            </div>
-            <div class="text-center pt-30 IE-only none" style="min-height: 350px;">
-                <img style="width: 300px;" src="{{MEDIA_URL}}img/home/section5.png">
-            </div>
-
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container-fluid pt-50 co-ffffff bgc-282828 pa" style="left: 0; bottom: 0; width: 100%;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4 text-center">
-                        <div class="col-md-3">
-                            <i class="contact-hover-email fa fa-envelope-o f28 bdc-ffffff border-2 bdr-circle pl-8 pr-8 pb-8 pt-8"></i>
-                        </div>
-                        <div class="col-md-3">
-                            <i class="contact-hover-qq fa fa-qq f28 bdc-ffffff border-2 bdr-circle pl-8 pr-8 pb-8 pt-8"></i>
-                        </div>
-                        <div class="col-md-3">
-                            <i class="contact-hover-weibo fa fa-weibo f28 bdc-ffffff border-2 bdr-circle pl-8 pr-8 pb-8 pt-8"></i>
-                        </div>
-                        <div class="col-md-3">
-                            <i class="contact-hover-weixin fa fa-weixin f28 bdc-ffffff border-2 bdr-circle pl-6 pr-6 pb-8 pt-8"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-md-offset-3 text-center pr">
-                        <div class="pa bgc-666666" style="height: 1px; width: 120px; left: 80px; top: 42px;"></div>
-                        <div class="col-md-4 col-md-offset-4 pt-30 f18">4008 - 527 - 527</div>
-                        <div class="pa bgc-666666" style="height: 1px; width: 120px; left: 380px; top: 42px;"></div>
-                    </div>
-
-                    <div class="col-md-6 col-md-offset-3 text-center pt-45">
-                        <img class="w80" src="{{MEDIA_URL}}img/logo.png">
-                    </div>
-
-                    <div class="col-md-6 col-md-offset-3 pt-20 pb-20 pl-0 co-555555 f12 text-center">
-                        Copyright &copy; {% if YEAR == "2015" %}{{YEAR}}{% else %}2015 - {{YEAR}}{% endif %} 84che.com. All Rights Reserved.
-                    </div>
-                </div>
+            <div class="mt-15 f14 co-bbbbbb scroll-list">
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
+                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
+                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
+                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
+                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
+                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
+                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
+                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
+                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
+                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
+                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
             </div>
         </div>
-    </div>
 
+        <div class="col-md-7 none evaluate-result">
+            <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">评估结果:</div>
+            <div class="pt-15 f20">
+                您的
+                <span class="pl-5 pr-5">奔驰S级</span>
+                <span class="pl-5 pr-5">600L</span>
+                评估价为:
+                <span class="co-66afe9 pl-5 pr-5"><i class="fa fa-rmb"></i>32.10万</span>
+            </div>
+            <div class="f14 pt-5 pb-20 co-bbbbbb">
+                <span>2014年 05月上牌，2.34万公里，新车指导价 <i class="fa fa-rmb"></i>49.9万</span>
+            </div>
+            <div class="pt-5 pb-20">
+                <a class="btn btn-primary" href="#">高 价 卖 车</a>
+            </div>
+            <div class="pt-20 pb-50">
+                <a class="" href="/">我要评估其他车>></a>
+            </div>
+        </div>
+
+        <div class="col-md-5 pl-60 pr-0">
+            <ul class="pt-50 list-group">
+                <li class="list-group-item">
+                    <div class="pl-70 pr">
+                        <img class="pa" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god.png?t=2">
+                        <a class="pa f13" style="top: 5px; right: 0;" href="#"><i class="fa fa-qq"></i>咨询车神</a>
+                        <div class="f16 pt-5">王撕葱</div>
+                        <div class="pt-5 co-bbbbbb">真实体验说话/态度鲜明/犀利、爱挑刺</div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="pl-70 pr">
+                        <img class="pa" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god2.png?t=2">
+                        <a class="pa f13" style="top: 5px; right: 0;" href="#"><i class="fa fa-qq"></i>咨询车神</a>
+                        <div class="f16 pt-5">聪哥</div>
+                        <div class="pt-5 co-bbbbbb">评估大师/真实体验说话/态度鲜明</div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="pl-70 pr">
+                        <img class="pa f13" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god3.png?t=2">
+                        <a class="pa" style="top: 5px; right: 0;" href="#"><i class="fa fa-qq"></i>咨询车神</a>
+                        <div class="f16 pt-5">暮雨</div>
+                        <div class="pt-5 co-bbbbbb">真实体验说话/专业性能测评/态度鲜明</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div> 
 </div>
 {% endblock %}
 
-{% block footer %}{% endblock %}

@@ -5,10 +5,11 @@
 <style type="text/css">
 .nav>li>a{
     color: #ffffff;
+    transition: all 0.3s;
 }
 
 .nav>li>a:hover{
-    color: #ffffff;
+    color: #3297fd;
     background-color: transparent;
 }
 
@@ -22,22 +23,25 @@
 }
 
 .navbar-nav>li.active>a{
-    color: #ffffff;
+    color: #3297fd;
 }
 
 .navbar-brand{
     height: auto;
+}
+.navbar-brand:hover{
+    color: #ffffff;
 }
 
 .navbar{
     min-height: 80px;
 }
 
-.line-hover{
+.line-hover1{
     position: absolute; 
     width: 100%; 
     height: 1px; 
-    background-color: #ffffff; 
+    background-color: #83CA6B; 
     top: 65px;
     left: 0;
     transition: all 0.3s;
@@ -71,7 +75,7 @@
 
 {% block header %}
 <header class="navbar navbar-fixed-top" role="banner">
-    <div class="pa" style="opacity: 0.05; filter: alpha(opacity=5); background-color: black; width: 100%; height: 100%;"></div>
+    <div class="pa" style="opacity: 0.1; filter: alpha(opacity=1); background-color: black; width: 100%; height: 100%;"></div>
     <div class="container pr-50 pl-60">
         <div class="navbar-header pr">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -80,44 +84,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!-- <a href="../" class="navbar-brand co-ffffff" style="font-size: 40px; padding-top: 30px;">巴适二手车</a> -->
-            <a href="/"><img class="w90 pa" style="left: 5px; top: 19px;" alt="巴适二手车" src="{{MEDIA_URL}}img/logo.png"></a>
+            <a href="../" class="navbar-brand co-ffffff" style="font-size: 40px; padding-top: 30px;">巴适二手车</a>
+            <!-- <a href="/"><img class="w90 pa" style="left: 5px; top: 19px;" alt="巴适二手车" src="{{MEDIA_URL}}img/logo.png"></a> -->
         </div>
         <nav class="collapse navbar-collapse" role="navigation">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a class="f16 pr" href="#">
-                        首页
+                    <a class="f20 pr" href="#">
+                        估价
                         <span class="line-hover"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="f16" href="#">
-                        产品服务
+                    <a class="f20" href="#">
+                        二手车
                         <span class="line-hover"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="f16" href="#">
-                        巴适二手车众筹
+                    <a class="f20" href="#">
+                        车神
                         <span class="line-hover"></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="f16" href="#">
-                        常见问题
-                        <span class="line-hover"></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="f16" href="#">
-                        关于我们
-                        <span class="line-hover"></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="f12" href="#">
-                        <span class="border-1 bdc-ffffff bdr-50 pt-3 pb-3 pr-8 pl-8">登录</span>
                     </a>
                 </li>
             </ul>
