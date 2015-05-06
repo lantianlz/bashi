@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/animate/animate.min.css" />
 <style type="text/css">
 .nav>li>a{
-    color: #ffffff;
+    color: #222222;
     transition: all 0.3s;
 }
 
@@ -30,7 +30,7 @@
     height: auto;
 }
 .navbar-brand:hover{
-    color: #ffffff;
+    /*color: #ffffff;*/
 }
 
 .navbar{
@@ -74,8 +74,8 @@
 {% endblock %}
 
 {% block header %}
-<header class="navbar navbar-fixed-top" role="banner">
-    <div class="pa" style="opacity: 0.1; filter: alpha(opacity=1); background-color: black; width: 100%; height: 100%;"></div>
+<header class="navbar navbar-fixed-top bgc-ffffff" style="border-bottom: solid 1px #ddd;" role="banner">
+    <!-- <div class="pa" style="opacity: 0.1; filter: alpha(opacity=1); background-color: black; width: 100%; height: 100%;"></div> -->
     <div class="container pr-50 pl-60">
         <div class="navbar-header pr">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -84,7 +84,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../" class="navbar-brand co-ffffff" style="font-size: 40px; padding-top: 30px;">巴适二手车</a>
+            <a href="../" class="navbar-brand" style="font-size: 40px; padding-top: 30px;">巴适二手车</a>
             <!-- <a href="/"><img class="w90 pa" style="left: 5px; top: 19px;" alt="巴适二手车" src="{{MEDIA_URL}}img/logo.png"></a> -->
         </div>
         <nav class="collapse navbar-collapse" role="navigation">
