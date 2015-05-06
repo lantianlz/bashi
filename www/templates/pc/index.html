@@ -2,7 +2,9 @@
 
 {% block title_all %}巴适二手车{% endblock %}
 {% block home_css %}
-<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}js/dropkick/css/dropkick.css" />
+<!-- <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}js/dropkick/css/dropkick.css" /> -->
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}js/selectize/css/selectize.css" />
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}js/selectize/css/selectize.bootstrap3.css" />
 <style type="text/css">
 .bg{
     width: 100%;
@@ -70,7 +72,8 @@
 {% endblock %}
 
 {% block home_js %}
-<script type="text/javascript" src="{{MEDIA_URL}}js/dropkick/dropkick.js"></script>
+<!-- <script type="text/javascript" src="{{MEDIA_URL}}js/dropkick/dropkick.js"></script> -->
+<script type="text/javascript" src="{{MEDIA_URL}}js/selectize/js/standalone/selectize.min.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery/jquery.easing.1.3.min.js"></script>
 
 <script type="text/javascript">
@@ -78,6 +81,7 @@ $(document).ready(function(){
 
     var count = 0;
 
+    // 背景切换
     window.setInterval(function(){
         $('.bg-img').eq(count).animate({'opacity': 0}, 500);
 
@@ -89,7 +93,23 @@ $(document).ready(function(){
     }, 5000);
     
 
-    $('.dropkick-sel').dropkick();
+    // $('.dropkick-sel').dropkick();
+    var selBrand = $('.sel-brand').selectize()[0].selectize,
+        selType = $('.sel-type').selectize()[0].selectize,
+        selStyle = $('.sel-style').selectize()[0].selectize,
+        selYear = $('.sel-year').selectize()[0].selectize,
+        selMonth = $('.sel-month').selectize()[0].selectize;
+
+    selBrand.on('change', function(value){
+        selType.focus();
+    });
+    selType.on('change', function(){
+        selStyle.focus();
+    });
+    selYear.on('change', function(){
+        selMonth.focus();
+    });
+
 
     // 无限滚动
     window.setInterval(function(){
@@ -103,7 +123,7 @@ $(document).ready(function(){
         })
     }, 2000);
 
-    // 估价
+    // 估价事件
     $('.btn-evaluate').bind('click', function(e){
         e.preventDefault();
         $('.evaluate-result').prev().addClass('none');
@@ -137,21 +157,33 @@ $(document).ready(function(){
             </div>
             <div class="pt-5 row">
                 <div class="col-md-6">
-                    <select class="dropkick-sel">
-                        <option value="0">请选择品牌</option>
-                        <option value="1">奔驰</option>
+                    <select class="selectize-sel sel-brand">
+                        <option value="">请选择品牌</option>
+                        <option value="1">A 奥迪</option>
+                        <option value="2">A 阿斯顿马丁</option>
+                        <option value="3">B 奔驰</option>
+                        <option value="4">B 宝马</option>
+                        <option value="5">D 大众</option>
+                        <option value="6">D 东风</option>
+                        <option value="7">D 大宇</option>
+                        <option value="8">F 福特</option>
+                        <option value="9">F 丰田</option>
+                        <option value="10">F 法拉利</option>
+                        <option value="11">L 兰博基尼</option>
+                        <option value="12">L 劳斯莱斯</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <select class="dropkick-sel">
-                        <option value="0">请选择车型</option>
+                    <select class="selectize-sel sel-type">
+                        <option value="">请选择车型</option>
                         <option value="1">奔驰S级</option>
+                        <option value="2">奔驰E级</option>
                     </select>
                 </div>
             </div>
             <div class="pt-15">
-                <select class="dropkick-sel">
-                    <option value="0">请选择车款</option>
+                <select class="selectize-sel sel-style">
+                    <option value="">请选择车款</option>
                     <option value="1">600L</option>
                 </select>
             </div>
@@ -160,14 +192,14 @@ $(document).ready(function(){
             </div>
             <div class="pt-5 row">
                 <div class="col-md-6">
-                    <select class="dropkick-sel">
-                        <option value="0">请选择上牌年份</option>
+                    <select class="selectize-sel sel-year">
+                        <option value="">请选择上牌年份</option>
                         <option value="1">2015 年</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <select class="dropkick-sel">
-                        <option value="0">请选择上牌月份</option>
+                    <select class="selectize-sel sel-month">
+                        <option value="">请选择上牌月份</option>
                         <option value="12">12 月</option>
                         <option value="11">11 月</option>
                     </select>
