@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'www.custom_tags',
     'www.admin',
     'www.account',
+    'www.car',
 )
 
 AUTHENTICATION_BACKENDS = ('www.middleware.user_backend.AuthBackend',)
