@@ -28,7 +28,7 @@
     z-index: 100;
     position: relative;
     color: #222;
-    padding: 30px 40px;
+    padding: 25px 35px;
 }
 .evaluate－cover{
     position: absolute;
@@ -38,8 +38,8 @@
     width: 400px; 
     height: 350px; 
     background-color: #ffffff; 
-    opacity: 0.5; 
-    border-radius: 4px;
+    /*opacity: 0.5; */
+    /*border-radius: 4px;*/
     border: solid 1px #ddd;
     /*box-shadow: 0px 0px 10px #ffffff;*/
 }
@@ -82,15 +82,15 @@ $(document).ready(function(){
     var count = 0;
 
     // 背景切换
-    window.setInterval(function(){
-        $('.bg-img').eq(count).animate({'opacity': 0}, 500);
+    // window.setInterval(function(){
+    //     $('.bg-img').eq(count).animate({'opacity': 0}, 500);
 
-        count = (count >= 3) ? -1 : count;
-        count += 1;
+    //     count = (count >= 3) ? -1 : count;
+    //     count += 1;
 
-        $('.bg-img').eq(count).animate({'opacity': 1}, 500);
+    //     $('.bg-img').eq(count).animate({'opacity': 1}, 500);
 
-    }, 5000);
+    // }, 5000);
     
 
     // $('.dropkick-sel').dropkick();
@@ -198,10 +198,102 @@ $(document).ready(function(){
     // 估价事件
     $('.btn-evaluate').bind('click', function(e){
         e.preventDefault();
+
+        var brand = selBrand.getValue(),
+            type = selType.getValue(),
+            style = selStyle.getValue(),
+            year = selYear.getValue(),
+            month = selMonth.getValue(),
+            distance = $('#distance').val();
+
+        if(!brand){
+            alert('请选择品牌');
+            selBrand.focus();
+            return;
+        }
+        if(!type){
+            alert('请选择车型');
+            selType.focus();
+            return;
+        }
+        if(!style){
+            alert('请选择车系');
+            selStyle.focus();
+            return;
+        }
+        if(!year){
+            alert('请选择上牌年份');
+            selYear.focus();
+            return;
+        }
+        if(!month){
+            alert('请选择上牌月份');
+            selMonth.focus();
+            return;
+        }
+        if(!distance){
+            alert('请出入行驶里程');
+            $('#distance').focus();
+            return;
+        }
+
         $('.evaluate-result').prev().addClass('none');
+        $('.evaluate-result').prev().prev().addClass('none');
         $('.evaluate-result').removeClass('none');
         // $('body').scrollTop(5000);
         $('body').animate({'scrollTop': 600}, 500);
+    });
+
+    var sellCarModal = function(){
+        var html = [
+            '<div class="modal fade" id="sell_car_modal" tabindex="-1" role="dialog">',
+                '<div class="modal-dialog">',
+                    '<div class="modal-content">',
+                        '<form role="form" class="form-horizontal" method="post" action="" onsubmit="javascript: return false;">',
+                            '<div class="modal-header pb-5">',
+                                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>',
+                                '<h4 class="modal-title">高价卖车</h4>',
+                            '</div>',
+                            '<div class="modal-body">',
+                                '<div class="form-group">',
+                                    '<div class="col-md-12">请填写您的手机号码: <span class="co-bbbbbb">(我们承诺不会公开您的手机号)</span></div>',
+                                '</div>',
+                                '<div class="form-group">',
+                                    '<div class="col-md-9">',
+                                        '<input class="form-control tel" placeholder="" />',
+                                    '</div>',
+                                    '<div class="col-md-3">',
+                                        '<a href="#" class="btn btn-primary btn-block btn-sell">提交</a>',
+                                    '</div>',
+                                '</div>',
+                            '</div>',
+                        '</form>',
+                    '</div>',
+                '</div>',
+            '</div>'
+        ].join('');
+
+        $('#sell_car_modal').remove();
+
+        $('body').append(html);
+
+        $('#sell_car_modal').modal({'show': true, 'backdrop': 'static'});
+
+        $('#sell_car_modal .btn-sell').on('click', function(){
+            var tel = $('#sell_car_modal .tel').val();
+            if(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(tel)){
+                $('#sell_car_modal').modal('hide');
+            } else {
+                alert('请输入有效的手机号码！');
+                return false;
+            }
+
+            
+        });
+    };
+
+    $('.btn-sell-car').on('click', function(){
+        sellCarModal();
     });
 });
 
@@ -210,16 +302,17 @@ $(document).ready(function(){
 
 {% block base_container %}
 
-<div class="container-fluid pl-0 pr-0" style="">
-    <div class="bg">
+<div class="container-fluid pl-0 pr-0" style="padding-top: 81px; overflow: hidden;">
+    <!-- <div class="bg">
         <img class="bg-img" style="opacity: 1;" src="{{MEDIA_URL}}img/banner1.jpg">
         <img class="bg-img" src="{{MEDIA_URL}}img/banner2.jpg">
         <img class="bg-img" src="{{MEDIA_URL}}img/banner3.jpg">
         <img class="bg-img" src="{{MEDIA_URL}}img/banner4.jpg">
-    </div>
+    </div> -->
+    <img class="" src="{{MEDIA_URL}}img/banner.jpg">
 </div>
 
-<div class="container-fluid pl-0 pr-0 pa" style="left: 0; top: 27%; width: 100%;">
+<div class="container-fluid pl-0 pr-0 pa" style="right: 0; top: 22%; width: 100%;">
     <div class="container pr-50 pl-60 pr">
         <div class="evaluate－cover"></div>
         <div class="evaluate－form">
@@ -234,19 +327,6 @@ $(document).ready(function(){
                         {% for brand in brands %}
                         <option value="{{brand.id}}">{{brand.first_word}} {{brand.name}}</option>
                         {% endfor %}
-                        <!-- <option value="2">A 阿斯顿马丁</option>
-                        <option value="3">B 奔驰</option>
-                        <option value="4">B 宝马</option>
-                        <option value="5">D 大众</option>
-                        <option value="6">D 东风</option>
-                        <option value="7">D 大宇</option>
-                        <optgroup label="丰田">
-                            <option value="8">F 福特</option>
-                            <option value="9">F 丰田</option>
-                            <option value="10">F 法拉利</option>
-                        </optgroup>
-                        <option value="11">L 兰博基尼</option>
-                        <option value="12">L 劳斯莱斯</option> -->
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -283,7 +363,7 @@ $(document).ready(function(){
             </div>
             <div class="pt-5 row">
                 <div class="col-md-6 pr">
-                    <input id="distance" class="form-control input-sm" type="text" style="font-size: 13px; border-radius:0;" />
+                    <input id="distance" maxlength="6" class="form-control input-sm" type="text" style="font-size: 13px; border-radius:0;" />
                     <label for="distance" class="pa" style="color: #777; right: 20px; top: 7px; font-size: 13px; font-weight: normal;">万公里</label>
                 </div>
                 <div class="col-md-6">
@@ -291,11 +371,40 @@ $(document).ready(function(){
                 </div>
             </div>
         </div>
+
+        <div class="pa co-ffffff" style="right: 60px; top: 0;">
+            <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">
+                <span>评估车源总量:<span class="co-ffffff pl-10 fb">5897万辆</span></span>
+                <span class="pl-15">估价准确率:<span class="co-ffffff pl-10 fb">95.7%</span></span>
+            </div>
+            <div class="mt-15 f14 scroll-list">
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
+                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
+                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
+                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
+                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
+                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
+                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
+                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
+                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
+                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
+                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
+                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="container pr-50 pl-60 pb-20 pt-50">
-    <div class="row">
+<div class="container pr-50 pl-60 pb-20 pt-50" >
+    <div class="row" style="border-bottom: 1px solid #ddd; padding-bottom: 40px;">
         <div class="col-md-4">
             <div class="f20">第三方估值平台</div>
             <div class="co-bbbbbb">公正透明独立第三方评估服务平台</div>
@@ -312,37 +421,71 @@ $(document).ready(function(){
 </div>
 
 <div class="container pr-50 pl-60 pb-20">
-    <div class="pr-50 pl-50 row">
-        <div class="col-md-7">
-            <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">
-                <span>评估车源总量:<span class="co-66afe9 pl-10">5897万辆</span></span>
-                <span class="pl-15">估价准确率:<span class="co-66afe9 pl-10">95.7%</span></span>
-            </div>
-            <div class="mt-15 f14 co-bbbbbb scroll-list">
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
-                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
-                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
-                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
-                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
-                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
-                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
-                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
-                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
-                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
-                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
-                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
-                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
-            </div>
+    <div class="pl-50 row">
+
+        <div class="col-md-4 pr-50">
+            <div class="pt-50 f16">大家都在估什么车</div>
+            <ul class="list-group">
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">01</span>
+                    <span class="pl-5">大众POLO</span>
+                    <span class="pull-right co-bbbbbb">54213</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">02</span>
+                    <span class="pl-5">奥迪A4</span>
+                    <span class="pull-right co-bbbbbb">43453</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">03</span>
+                    <span class="pl-5">雅阁</span>
+                    <span class="pull-right co-bbbbbb">32421</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">04</span>
+                    <span class="pl-5">宝马3系</span>
+                    <span class="pull-right co-bbbbbb">23453</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">05</span>
+                    <span class="pl-5">奔驰E300</span>
+                    <span class="pull-right co-bbbbbb">14323</span>
+                </li>
+            </ul>
         </div>
 
-        <div class="col-md-7 none evaluate-result">
+        <div class="col-md-4 pr-50">
+            <div class="pt-50 f16">大家都在卖什么车</div>
+            <ul class="list-group">
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">01</span>
+                    <span class="pl-5">大众POLO</span>
+                    <span class="pull-right co-bbbbbb">54213</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">02</span>
+                    <span class="pl-5">奥迪A4</span>
+                    <span class="pull-right co-bbbbbb">43453</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">03</span>
+                    <span class="pl-5">雅阁</span>
+                    <span class="pull-right co-bbbbbb">32421</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">04</span>
+                    <span class="pl-5">宝马3系</span>
+                    <span class="pull-right co-bbbbbb">23453</span>
+                </li>
+                <li class="list-group-item pl-5 pr-5">
+                    <span style="background-color: #448CCA; padding: 2px; color: #fff">05</span>
+                    <span class="pl-5">奔驰E300</span>
+                    <span class="pull-right co-bbbbbb">14323</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-8 none evaluate-result pr-50">
             <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">评估结果:</div>
             <div class="pt-15 f20">
                 您的
@@ -355,19 +498,21 @@ $(document).ready(function(){
                 <span>2014年 05月上牌，2.34万公里，新车指导价 <i class="fa fa-rmb"></i>49.9万</span>
             </div>
             <div class="pt-5 pb-20">
-                <a class="btn btn-primary" href="#">高 价 卖 车</a>
+                <a class="btn btn-primary btn-sell-car" href="#">高 价 卖 车</a>
             </div>
             <div class="pt-20 pb-50">
                 <a class="" href="/">我要评估其他车>></a>
             </div>
         </div>
 
-        <div class="col-md-5 pl-60 pr-0">
+        <div class="col-md-4">
             <ul class="pt-50 list-group">
                 <li class="list-group-item">
                     <div class="pl-70 pr">
                         <img class="pa" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god.png?t=2">
-                        <a class="pa f13" style="top: 5px; right: 0;" href="#"><i class="fa fa-qq"></i>咨询车神</a>
+                        <a class="pa f13" style="top: 5px; right: 0;" href="http://wpa.qq.com/msgrd?v=3&amp;uin=286394973&amp;site=qq&amp;menu=yes" target="_blank">
+                            <i class="fa fa-qq"></i>咨询车神
+                        </a>
                         <div class="f16 pt-5">王撕葱</div>
                         <div class="pt-5 co-bbbbbb">真实体验说话/态度鲜明/犀利、爱挑刺</div>
                     </div>
@@ -375,7 +520,9 @@ $(document).ready(function(){
                 <li class="list-group-item">
                     <div class="pl-70 pr">
                         <img class="pa" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god2.png?t=2">
-                        <a class="pa f13" style="top: 5px; right: 0;" href="#"><i class="fa fa-qq"></i>咨询车神</a>
+                        <a class="pa f13" style="top: 5px; right: 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=286394973&amp;site=qq&amp;menu=yes">
+                            <i class="fa fa-qq"></i>咨询车神
+                        </a>
                         <div class="f16 pt-5">聪哥</div>
                         <div class="pt-5 co-bbbbbb">评估大师/真实体验说话/态度鲜明</div>
                     </div>
@@ -383,7 +530,9 @@ $(document).ready(function(){
                 <li class="list-group-item">
                     <div class="pl-70 pr">
                         <img class="pa f13" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god3.png?t=2">
-                        <a class="pa" style="top: 5px; right: 0;" href="#"><i class="fa fa-qq"></i>咨询车神</a>
+                        <a class="pa f13" style="top: 5px; right: 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=286394973&amp;site=qq&amp;menu=yes">
+                            <i class="fa fa-qq"></i>咨询车神
+                        </a>
                         <div class="f16 pt-5">暮雨</div>
                         <div class="pt-5 co-bbbbbb">真实体验说话/专业性能测评/态度鲜明</div>
                     </div>

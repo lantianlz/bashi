@@ -89,24 +89,24 @@
         </div>
         <nav class="collapse navbar-collapse" role="navigation">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active">
-                    <a class="f20 pr" href="#">
+                <li {% if '/' == request.path %}class="active"{% endif %}>
+                    <a class="f20 pr" href="/">
                         估价
                         <span class="line-hover"></span>
                     </a>
                 </li>
-                <li>
-                    <a class="f20" href="#">
-                        二手车
+                <li {% if 'car_list' in request.path %}class="active"{% endif %}>
+                    <a class="f20" href="/car_list">
+                        买车
                         <span class="line-hover"></span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a class="f20" href="#">
                         车神
                         <span class="line-hover"></span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </div>
