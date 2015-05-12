@@ -23,19 +23,19 @@
 }
 
 .evaluate－form{
-    width: 400px; 
+    width: 420px; 
     height: 350px; 
     z-index: 100;
     position: relative;
     color: #222;
-    padding: 25px 35px;
+    padding: 25px 30px;
 }
 .evaluate－cover{
     position: absolute;
     z-index: 99;
     left: 60px;
     top: 0;
-    width: 400px; 
+    width: 420px; 
     height: 350px; 
     background-color: #ffffff; 
     /*opacity: 0.5; */
@@ -321,7 +321,7 @@ $(document).ready(function(){
                 选择车型
             </div>
             <div class="pt-5 row">
-                <div class="col-md-6">
+                <div class="col-md-6 pr-10">
                     <select class="selectize-sel sel-brand">
                         <option value="">请选择品牌</option>
                         {% for brand in brands %}
@@ -329,7 +329,7 @@ $(document).ready(function(){
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 pl-10">
                     <select class="selectize-sel sel-type" placeholder="请选择车型">
                         
                     </select>
@@ -343,14 +343,14 @@ $(document).ready(function(){
                 上牌时间
             </div>
             <div class="pt-5 row">
-                <div class="col-md-6">
+                <div class="col-md-6 pr-10">
                     <select class="selectize-sel sel-year" placeholder="请选择上牌年份">
                         {% for year in years %}
                         <option value="{{year}}">{{year}} 年</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 pl-10">
                     <select class="selectize-sel sel-month" placeholder="请选择上牌月份">
                         {% for month in months %}
                         <option value="{{month}}">{{month}} 月</option>
@@ -362,11 +362,11 @@ $(document).ready(function(){
                 行驶里程
             </div>
             <div class="pt-5 row">
-                <div class="col-md-6 pr">
+                <div class="col-md-6 pr pr-10">
                     <input id="distance" maxlength="6" class="form-control input-sm" type="text" style="font-size: 13px; border-radius:0;" />
                     <label for="distance" class="pa" style="color: #777; right: 20px; top: 7px; font-size: 13px; font-weight: normal;">万公里</label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 pl-10">
                     <a href="#" style="border-radius:0;" class="btn btn-sm btn-primary btn-block f13 btn-evaluate">开  始  估  价</a>
                 </div>
             </div>
@@ -427,27 +427,27 @@ $(document).ready(function(){
             <div class="pt-50 f16">大家都在估什么车</div>
             <ul class="list-group">
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">01</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">01</span>
                     <span class="pl-5">大众POLO</span>
                     <span class="pull-right co-bbbbbb">54213</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">02</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">02</span>
                     <span class="pl-5">奥迪A4</span>
                     <span class="pull-right co-bbbbbb">43453</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">03</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">03</span>
                     <span class="pl-5">雅阁</span>
                     <span class="pull-right co-bbbbbb">32421</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">04</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">04</span>
                     <span class="pl-5">宝马3系</span>
                     <span class="pull-right co-bbbbbb">23453</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">05</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">05</span>
                     <span class="pl-5">奔驰E300</span>
                     <span class="pull-right co-bbbbbb">14323</span>
                 </li>
@@ -458,27 +458,27 @@ $(document).ready(function(){
             <div class="pt-50 f16">大家都在卖什么车</div>
             <ul class="list-group">
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">01</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">01</span>
                     <span class="pl-5">大众POLO</span>
                     <span class="pull-right co-bbbbbb">54213</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">02</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">02</span>
                     <span class="pl-5">奥迪A4</span>
                     <span class="pull-right co-bbbbbb">43453</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">03</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">03</span>
                     <span class="pl-5">雅阁</span>
                     <span class="pull-right co-bbbbbb">32421</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">04</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">04</span>
                     <span class="pl-5">宝马3系</span>
                     <span class="pull-right co-bbbbbb">23453</span>
                 </li>
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #448CCA; padding: 2px; color: #fff">05</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff">05</span>
                     <span class="pl-5">奔驰E300</span>
                     <span class="pull-right co-bbbbbb">14323</span>
                 </li>
@@ -486,23 +486,30 @@ $(document).ready(function(){
         </div>
 
         <div class="col-md-8 none evaluate-result pr-50">
+            
             <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">评估结果:</div>
-            <div class="pt-15 f20">
-                您的
-                <span class="pl-5 pr-5">奔驰S级</span>
-                <span class="pl-5 pr-5">600L</span>
-                评估价为:
-                <span class="co-66afe9 pl-5 pr-5"><i class="fa fa-rmb"></i>32.10万</span>
+            <div class="col-md-8 pl-0 pr-0">
+                <div class="pt-15 f20">
+                    您的
+                    <span class="pl-5 pr-5">奔驰S级</span>
+                    <span class="pl-5 pr-5">600L</span>
+                    评估价为:
+                    <span class="co-66afe9 pl-5 pr-5"><i class="fa fa-rmb"></i>32.10万</span>
+                </div>
+                <div class="f14 pt-5 pb-20 co-bbbbbb">
+                    <span>2014年 05月上牌，2.34万公里，新车指导价 <i class="fa fa-rmb"></i>49.9万</span>
+                </div>
+                <div class="pt-5 pb-20">
+                    <a class="btn btn-primary btn-sell-car" href="#">高 价 卖 车</a>
+                </div>
+                <div class="pt-20 pb-50">
+                    <a class="" href="/">我要评估其他车>></a>
+                </div>
             </div>
-            <div class="f14 pt-5 pb-20 co-bbbbbb">
-                <span>2014年 05月上牌，2.34万公里，新车指导价 <i class="fa fa-rmb"></i>49.9万</span>
+            <div class="col-md-4 pr-5 pl-5 pt-20">
+                <img class="w" src="http://img3.bitautoimg.com/autoalbum/files/20120803/264/1007332648_3.jpg">
             </div>
-            <div class="pt-5 pb-20">
-                <a class="btn btn-primary btn-sell-car" href="#">高 价 卖 车</a>
-            </div>
-            <div class="pt-20 pb-50">
-                <a class="" href="/">我要评估其他车>></a>
-            </div>
+            
         </div>
 
         <div class="col-md-4">
