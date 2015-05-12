@@ -82,6 +82,6 @@ def get_car_basic_info():
                 CarBasicInfo.objects.create(name=car_name, year=year, ex_id=ex_id, serial=serial)
 
 if __name__ == '__main__':
-    # get_brand()
-    # get_serial()
+    get_brand()
+    get_serial()
     get_car_basic_info()
