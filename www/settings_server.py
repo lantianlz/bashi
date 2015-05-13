@@ -18,7 +18,7 @@ import sys
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.extend([os.path.abspath(os.path.join(SITE_ROOT, '../'))])
 
-SERVER_NAME = 'bashi_WEB0' if not LOCAL_FLAG else 'DEVELOPER'
+SERVER_NAME = 'BASHI_WEB0' if not LOCAL_FLAG else 'DEVELOPER'
 SERVER_DOMAIN = '84che.com' if not LOCAL_FLAG else '192.168.0.199:8002'
 MAIN_DOMAIN = ('http://www.%s' % SERVER_DOMAIN) if not LOCAL_FLAG else ('http://%s' % SERVER_DOMAIN)
 
