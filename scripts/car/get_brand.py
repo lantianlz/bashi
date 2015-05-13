@@ -90,7 +90,10 @@ def get_car_original_price():
             continue
         brand = car.serial.brand
         brand_ex_id = brand.ex_id or brand.parent_brand.ex_id
-        year = car.year if car.year != u"其他" else "2015"
+        current_year = datetime.datetime.now().year
+        year = car.year if car.year != u"其他" else current_year
+        if int(year) > current_year:
+            year = current_year
         url = "http://www.taoche.com/pinggu/pricesearch.aspx?t=7&b=%s&s=%s&c=%s&y=%s&m=0.1" % (brand_ex_id, car.serial.ex_id,
                                                                                                car.ex_id, year + "-04")
         for j in range(3):
