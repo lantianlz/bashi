@@ -52,3 +52,30 @@ class CarBasicInfo(models.Model):
 
     class Meta:
         unique_together = [("name", "year", "serial"), ]
+
+
+class UserUsedCar(models.Model):
+
+    """
+    @note: 用户提交的二手车信息
+    """
+    car = models.ForeignKey("CarBasicInfo")
+    get_license_time = models.DateTimeField(db_index=True)
+    trip_distance = models.FloatField()
+    mobile = mobile.CharField(max_length=32, null=True)
+    ip = models.IPAddressField(null=True)
+    create_time = models.DateTimeField(auto_now_add=True, db_index=True)
+
+
+class ExUsedCar(models.Model):
+
+    """
+    @note: 站外获取的二手车信息
+    """
+    name = models.CharField(max_length=128)
+    source = models.IntegerField(db_index=True)
+    ex_id = models.CharField(max_length=128, db_index=True)
+    create_time = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        unique_together = [("source", "ex_id",), ]
