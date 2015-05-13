@@ -95,7 +95,7 @@ def get_car_original_price():
         if int(year) > current_year:
             year = current_year
         url = "http://www.taoche.com/pinggu/pricesearch.aspx?t=7&b=%s&s=%s&c=%s&y=%s&m=0.1" % (brand_ex_id, car.serial.ex_id,
-                                                                                               car.ex_id, year + "-04")
+                                                                                               car.ex_id, "%s-04" % year)
         for j in range(3):
             try:
                 text = requests.get(url, timeout=10, headers=headers).text
