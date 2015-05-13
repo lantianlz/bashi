@@ -14,6 +14,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'www.settings'
 import time
 import json
 import requests
+import datetime
+from pyquery import PyQuery as pq
 from django.conf import settings
 from www.car.models import Brand, Serial, CarBasicInfo
 
@@ -81,7 +83,39 @@ def get_car_basic_info():
             if not CarBasicInfo.objects.filter(name=car_name, serial=serial, year=year):
                 CarBasicInfo.objects.create(name=car_name, year=year, ex_id=ex_id, serial=serial)
 
+
+def get_car_original_price():
+    for i, car in enumerate(CarBasicInfo.objects.select_related("serial").all().order_by("id")):
+        if i < 15026:
+            continue
+        brand = car.serial.brand
+        brand_ex_id = brand.ex_id or brand.parent_brand.ex_id
+        year = car.year if car.year != u"其他" else "2015"
+        url = "http://www.taoche.com/pinggu/pricesearch.aspx?t=7&b=%s&s=%s&c=%s&y=%s&m=0.1" % (brand_ex_id, car.serial.ex_id,
+                                                                                               car.ex_id, year + "-04")
+        for j in range(3):
+            try:
+                text = requests.get(url, timeout=10, headers=headers).text
+            except:
+                pass
+            break
+        text = pq(text)
+        words = text(".pgcxtit p").html().strip()
+        print car.id, words.encode("utf8")
+        words = words.split(u"指导价")[1]
+
+        if u"万" in words:
+            original_price = float(words.replace(u"万", ""))
+        car.original_price = original_price
+        car.img = text(".pgyh_pic img").attr("src")
+        car.save()
+
+        if i % 100 == 0:
+            print i, datetime.datetime.now()
+
+
 if __name__ == '__main__':
     # get_brand()
     # get_serial()
-    get_car_basic_info()
+    # get_car_basic_info()
+    get_car_original_price()
