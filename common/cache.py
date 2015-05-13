@@ -4,12 +4,12 @@ import redis
 from cPickle import dumps, loads
 
 
-CACHE_WORKER = ('cache0', 6379, 1, 'worker')
-CACHE_TMP = ('cache0', 6379, 5, 'tmp')
-CACHE_STATIC = ('cache0', 6379, 6, 'static')
-CACHE_USER = ('cache0', 6379, 7, 'user')
-CACHE_SESSION = ('cache0', 6379, 8, 'session')
-CACHE_TIMELINE = ('cache0', 6379, 9, 'timeline')
+CACHE_WORKER = ('cache0', 6379, 2, 'worker')
+CACHE_TMP = ('cache0', 6379, 10, 'tmp')
+CACHE_STATIC = ('cache0', 6379, 11, 'static')
+CACHE_USER = ('cache0', 6379, 12, 'user')
+CACHE_SESSION = ('cache0', 6379, 13, 'session')
+CACHE_TIMELINE = ('cache0', 6379, 14, 'timeline')
 CONNECTIONS = {}
 
 
