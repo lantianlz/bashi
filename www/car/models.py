@@ -62,7 +62,7 @@ class UserUsedCar(models.Model):
     car = models.ForeignKey("CarBasicInfo")
     get_license_time = models.DateTimeField(db_index=True)
     trip_distance = models.FloatField()
-    mobile = mobile.CharField(max_length=32, null=True)
+    mobile = models.CharField(max_length=32, null=True)
     ip = models.IPAddressField(null=True)
     create_time = models.DateTimeField(auto_now_add=True, db_index=True)
 
