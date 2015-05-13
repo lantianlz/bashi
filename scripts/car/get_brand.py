@@ -86,7 +86,7 @@ def get_car_basic_info():
 
 def get_car_original_price():
     for i, car in enumerate(CarBasicInfo.objects.select_related("serial").all().order_by("id")):
-        if i < 15600:
+        if i < 16624:
             continue
         brand = car.serial.brand
         brand_ex_id = brand.ex_id or brand.parent_brand.ex_id
