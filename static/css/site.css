@@ -9,6 +9,10 @@ a:focus {outline: none;-moz-outline: none;}
 .no-underline{text-decoration: none;}
 .no-underline:hover{text-decoration: none;}
 
+.line-height-35{
+	line-height: 35px;
+}
+
 .none{display:none}
 .block{display:block;}
 .visible{visibility: visible;}

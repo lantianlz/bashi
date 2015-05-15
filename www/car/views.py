@@ -8,7 +8,9 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
-from car.interface import BrandBase, SerialBase, CarBasicInfoBase
+import common.utils
+from www.misc.decorators import common_ajax_response
+from car.interface import BrandBase, SerialBase, CarBasicInfoBase, UserUsedCarBase
 
 def car(request, template_name='pc/index.html'):
     brands = BrandBase().get_all_parent_brand(True)
@@ -47,3 +49,49 @@ def get_car_basic_info_by_serial(request):
         })
 
     return HttpResponse(json.dumps(data))
+
+def evaluate_price(request):
+    car_basic_info_id = request.REQUEST.get('car_basic_info_id')
+    year = request.REQUEST.get('year')
+    month = request.REQUEST.get('month')
+    get_license_time = datetime.datetime(year=int(year), month=int(month), day=1)
+    trip_distance = request.REQUEST.get('distance')
+    ip = common.utils.get_clientip(request)
+
+    flag, obj, price = UserUsedCarBase().evaluate_price(car_basic_info_id, get_license_time, trip_distance, ip)
+
+    data = {}
+    if flag == 0:
+        data = {
+            'user_used_car_id': obj.id,
+            'name': obj.car.name,
+            'serial_name': obj.car.serial.name,
+            'price': str(price),
+            'original_price': str(obj.car.original_price),
+            'license_time': obj.get_license_time.strftime('%Y年 %m月'),
+            'trip_distance': obj.trip_distance,
+            'img': obj.car.img
+        }
+
+    return HttpResponse(json.dumps({'errcode': flag, 'data': data}))
+
+@common_ajax_response
+def sell_car(request):
+    user_used_car_id = request.REQUEST.get('user_used_car_id')
+    mobile = request.REQUEST.get('mobile')
+
+    return UserUsedCarBase().sell_car(user_used_car_id, mobile)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

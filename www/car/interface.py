@@ -2,7 +2,7 @@
 
 from common import debug
 from www.misc import consts
-from www.car.models import Brand, CarBasicInfo, Serial
+from www.car.models import Brand, CarBasicInfo, Serial, UserUsedCar
 
 dict_err = {
     20100: u'',
@@ -95,8 +95,38 @@ class CarBasicInfoBase(object):
         return objs.filter(serial__id=serial_id)
 
 
+class UserUsedCarBase(object):
 
+    def __init__(self):
+        pass
 
+    def evaluate_price(self, car_basic_info_id, get_license_time, trip_distance, ip):
+        price = 1
+        obj = None
+        try:
+            obj = UserUsedCar.objects.create(
+                car_id = car_basic_info_id,
+                get_license_time = get_license_time,
+                trip_distance = trip_distance,
+                ip = ip
+            )
 
+        except Exception, e:
+            debug.get_debug_detail(e)
+            return 99900, dict_err.get(99900), price
 
+        return 0, obj, price
 
+    def sell_car(self, user_used_car_id, mobile):
+        obj = UserUsedCar.objects.filter(id=user_used_car_id)
+        if obj:
+            obj = obj[0]
+
+        try:
+            obj.mobile = mobile
+            obj.save()
+        except Exception, e:
+            debug.get_debug_detail(e)
+            return 99900, dict_err.get(99900)
+
+        return 0, dict_err.get(0)

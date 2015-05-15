@@ -231,17 +231,42 @@ $(document).ready(function(){
             selMonth.focus();
             return;
         }
-        if(!distance){
-            alert('请出入行驶里程');
+        if(!distance || !/^((\d+)|(\d+.\d{1,2}))$/.test(distance)){
+            alert('请出入正确的行驶里程');
             $('#distance').focus();
             return;
         }
 
-        $('.evaluate-result').prev().addClass('none');
-        $('.evaluate-result').prev().prev().addClass('none');
-        $('.evaluate-result').removeClass('none');
-        // $('body').scrollTop(5000);
-        $('body').animate({'scrollTop': 600}, 500);
+        ajaxSend(
+            '/car/evaluate_price', 
+            {'car_basic_info_id': style, 'year': year, 'month': month, 'distance': distance},
+            function(data){
+                // 更新数据
+                $('.info-price').html([
+                    '您的',
+                    '<span class="pl-5 pr-5">'+data.data['serial_name']+'</span>',
+                    '<span class="pl-5 pr-5">'+data.data['name']+'</span>',
+                    '<br>评估价为:',
+                    '<span class="co-66afe9 pl-15 pr-5"><i class="fa fa-rmb"></i>'+data.data['price']+' 万</span>'
+                ].join(''));
+
+                $('.info-desc').html([
+                    '<span>'+data.data['license_time']+'上牌，'+data.data['trip_distance']+'万公里，新车指导价 <i class="fa fa-rmb"></i>'+data.data['original_price']+' 万</span>'
+                ].join(''));
+
+                $('.car-img').attr('src', data.data['img']);
+
+                $('#user_used_car_id').val(data.data['user_used_car_id']);
+
+                // 控制页面
+                $('.evaluate-result').prev().addClass('none');
+                $('.evaluate-result').prev().prev().addClass('none');
+                $('.evaluate-result').removeClass('none');
+                // $('body').scrollTop(5000);
+                $('body').animate({'scrollTop': 600}, 500);
+            }
+        );
+        
     });
 
     var sellCarModal = function(){
@@ -263,7 +288,7 @@ $(document).ready(function(){
                                         '<input class="form-control tel" placeholder="" />',
                                     '</div>',
                                     '<div class="col-md-3">',
-                                        '<a href="#" class="btn btn-primary btn-block btn-sell">提交</a>',
+                                        '<a href="#" style="border-radius: 0;" class="btn btn-primary btn-block btn-sell">提交</a>',
                                     '</div>',
                                 '</div>',
                             '</div>',
@@ -281,14 +306,24 @@ $(document).ready(function(){
 
         $('#sell_car_modal .btn-sell').on('click', function(){
             var tel = $('#sell_car_modal .tel').val();
-            if(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(tel)){
-                $('#sell_car_modal').modal('hide');
-            } else {
+            if(!/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(tel)){
                 alert('请输入有效的手机号码！');
                 return false;
             }
-
             
+            ajaxSend(
+                '/car/sell_car', 
+                {'user_used_car_id': $('#user_used_car_id').val(), 'mobile': tel},
+                function(data){
+                    if(data.errcode===0){
+                        alert('提交成功！稍后客服将与你联系卖车事宜。');
+                        $('#sell_car_modal').modal('hide');
+                    } else {
+                        alert('提交失败！' + data.errmsg);
+                    }
+                }
+            );
+
         });
     };
 
@@ -322,7 +357,7 @@ $(document).ready(function(){
             </div>
             <div class="pt-5 row">
                 <div class="col-md-6 pr-10">
-                    <select class="selectize-sel sel-brand">
+                    <select class="selectize-sel sel-brand" placeholder="请选择品牌">
                         <option value="">请选择品牌</option>
                         {% for brand in brands %}
                         <option value="{{brand.id}}">{{brand.first_word}} {{brand.name}}</option>
@@ -489,27 +524,27 @@ $(document).ready(function(){
             
             <div class="pt-50 f16 pb-5" style="border-bottom: 1px solid #ddd;">评估结果:</div>
             <div class="col-md-8 pl-0 pr-0">
-                <div class="pt-15 f20">
+                <div class="pt-15 f20 info-price line-height-35">
                     您的
                     <span class="pl-5 pr-5">奔驰S级</span>
                     <span class="pl-5 pr-5">600L</span>
                     评估价为:
                     <span class="co-66afe9 pl-5 pr-5"><i class="fa fa-rmb"></i>32.10万</span>
                 </div>
-                <div class="f14 pt-5 pb-20 co-bbbbbb">
+                <div class="f14 pt-5 pb-20 co-bbbbbb info-desc">
                     <span>2014年 05月上牌，2.34万公里，新车指导价 <i class="fa fa-rmb"></i>49.9万</span>
                 </div>
                 <div class="pt-5 pb-20">
-                    <a class="btn btn-primary btn-sell-car" href="#">高 价 卖 车</a>
+                    <a class="btn btn-primary btn-sell-car" style="border-radius:0;" href="#">高 价 卖 车</a>
                 </div>
                 <div class="pt-20 pb-50">
                     <a class="" href="/">我要评估其他车>></a>
                 </div>
             </div>
             <div class="col-md-4 pr-5 pl-5 pt-20">
-                <img class="w" src="http://img3.bitautoimg.com/autoalbum/files/20120803/264/1007332648_3.jpg">
+                <img class="w car-img" src="http://img3.bitautoimg.com/autoalbum/files/20120803/264/1007332648_3.jpg">
             </div>
-            
+            <input type="hidden" value="" id="user_used_car_id" />
         </div>
 
         <div class="col-md-4">
