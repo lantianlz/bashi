@@ -413,8 +413,10 @@ $(document).ready(function(){
                 <span class="pl-15">估价准确率:<span class="co-ffffff pl-10 fb">95.7%</span></span>
             </div>
             <div class="mt-15 f14 scroll-list">
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                {% for history in historys %}
+                <div class="pb-5">{{history.car.serial.name}} {{history.car.name}} 估价 {{history.price}} 万</div>
+                {% endfor %}
+                <!-- <div class="pb-5">朗逸爱车估价 10.53万</div>
                 <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
                 <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
                 <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
@@ -432,7 +434,7 @@ $(document).ready(function(){
                 <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
                 <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
                 <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
+                <div class="pb-5">朗逸爱车估价 10.53万</div> -->
             </div>
         </div>
     </div>

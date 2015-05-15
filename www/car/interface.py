@@ -100,6 +100,9 @@ class UserUsedCarBase(object):
     def __init__(self):
         pass
 
+    def get_all_user_used_car(self):
+        return UserUsedCar.objects.all().order_by('-create_time')
+
     def evaluate_price(self, car_basic_info_id, get_license_time, trip_distance, ip):
         price = 1
         obj = None
@@ -108,7 +111,8 @@ class UserUsedCarBase(object):
                 car_id = car_basic_info_id,
                 get_license_time = get_license_time,
                 trip_distance = trip_distance,
-                ip = ip
+                ip = ip,
+                price = price
             )
 
         except Exception, e:

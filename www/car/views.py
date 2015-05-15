@@ -20,6 +20,8 @@ def car(request, template_name='pc/index.html'):
     years.reverse()
     months = range(1, 13)
 
+    historys = UserUsedCarBase().get_all_user_used_car()[:20]
+
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 def get_serial_by_brand(request):

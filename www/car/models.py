@@ -64,6 +64,7 @@ class UserUsedCar(models.Model):
     trip_distance = models.FloatField()
     mobile = models.CharField(max_length=32, null=True)
     ip = models.IPAddressField(null=True)
+    price = models.FloatField(default=0)
     create_time = models.DateTimeField(auto_now_add=True, db_index=True)
 
 
