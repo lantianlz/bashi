@@ -236,7 +236,7 @@ $(document).ready(function(){
             $('#distance').focus();
             return;
         }
-
+        g_ajax_processing_obj_id = "a_evaluate";
         ajaxSend(
             '/car/evaluate_price', 
             {'car_basic_info_id': style, 'year': year, 'month': month, 'distance': distance},
@@ -402,7 +402,7 @@ $(document).ready(function(){
                     <label for="distance" class="pa" style="color: #777; right: 20px; top: 7px; font-size: 13px; font-weight: normal;">万公里</label>
                 </div>
                 <div class="col-md-6 pl-10">
-                    <a href="#" style="border-radius:0;" class="btn btn-sm btn-primary btn-block f13 btn-evaluate">开  始  估  价</a>
+                    <a href="#" id="a_evaluate" style="border-radius:0;" class="btn btn-sm btn-primary btn-block f13 btn-evaluate">开  始  估  价</a>
                 </div>
             </div>
         </div>

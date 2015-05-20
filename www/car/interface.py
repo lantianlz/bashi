@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from pyquery import PyQuery as pq
+import requests, re
+
 from common import debug
 from www.misc import consts
 from www.car.models import Brand, CarBasicInfo, Serial, UserUsedCar
@@ -94,6 +97,9 @@ class CarBasicInfoBase(object):
 
         return objs.filter(serial__id=serial_id)
 
+    def get_car_basic_info_by_id(self, id, state=None):
+        return self.get_all_car_basic_info(state).filter(id=id)
+
 
 class UserUsedCarBase(object):
 
@@ -104,7 +110,7 @@ class UserUsedCarBase(object):
         return UserUsedCar.objects.all().order_by('-create_time')
 
     def evaluate_price(self, car_basic_info_id, get_license_time, trip_distance, ip):
-        price = 1
+        price = self.get_yiche_price(car_basic_info_id, get_license_time, trip_distance)
         obj = None
         try:
             obj = UserUsedCar.objects.create(
@@ -120,6 +126,32 @@ class UserUsedCarBase(object):
             return 99900, dict_err.get(99900), price
 
         return 0, obj, price
+
+    def get_yiche_price(self, car_basic_info_id, get_license_time, trip_distance):
+        '''
+        获取易车网价格
+        '''
+        price = 0.0
+        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:29.0) Gecko/20100101 Firefox/29.0"}
+        try:
+            car = CarBasicInfoBase().get_car_basic_info_by_id(car_basic_info_id)
+            if not car:
+                return price
+            car = car[0]
+            brand = car.serial.brand
+            brand_ex_id = brand.ex_id or brand.parent_brand.ex_id
+            year = get_license_time.strftime('%Y-%m-%d')
+
+            url = "http://www.taoche.com/pinggu/pricesearch.aspx?t=7&b=%s&s=%s&c=%s&y=%s&m=%s" % (brand_ex_id, car.serial.ex_id,
+                                                                                               car.ex_id, year, trip_distance)
+            rep = requests.get(url, timeout=10, headers=headers)
+            text = pq(rep.text)
+            
+            price = re.search('\d+.?\d+', text('.cegnjj').find('strong').text()).group()
+        except Exception, e:
+            debug.get_debug_detail(e)
+
+        return float(price)
 
     def sell_car(self, user_used_car_id, mobile):
         obj = UserUsedCar.objects.filter(id=user_used_car_id)
