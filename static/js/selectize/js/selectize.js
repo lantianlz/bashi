@@ -2485,6 +2485,7 @@
 					self.renderCache[templateName] = {};
 				}
 				if (self.renderCache[templateName].hasOwnProperty(value)) {
+					alert(value)
 					return self.renderCache[templateName][value];
 				}
 			}
