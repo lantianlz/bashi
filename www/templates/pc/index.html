@@ -332,18 +332,22 @@ $(document).ready(function(){
 
 {% block base_container %}
 
-<div class="container-fluid pl-0 pr-0" style="padding-top: 81px; overflow: hidden;">
-    <!-- <div class="bg">
-        <img class="bg-img" style="opacity: 1;" src="{{MEDIA_URL}}img/banner1.jpg">
-        <img class="bg-img" src="{{MEDIA_URL}}img/banner2.jpg">
-        <img class="bg-img" src="{{MEDIA_URL}}img/banner3.jpg">
-        <img class="bg-img" src="{{MEDIA_URL}}img/banner4.jpg">
+<div class="container-fluid" style="margin-top: 81px; padding: 0;">
+    <!-- <div class="container pl-0 pr-0" style="margin-top: 81px; overflow: hidden; height: 460px;">
+        <div class="bg">
+            <img class="bg-img" style="opacity: 1;" src="{{MEDIA_URL}}img/banner1.jpg">
+            <img class="bg-img" src="{{MEDIA_URL}}img/banner2.jpg">
+            <img class="bg-img" src="{{MEDIA_URL}}img/banner3.jpg">
+            <img class="bg-img" src="{{MEDIA_URL}}img/banner4.jpg">
+        </div>
+        <img class="" src="{{MEDIA_URL}}img/banner4.jpg">
     </div> -->
-    <img class="bg-img" src="{{MEDIA_URL}}img/banner4.jpg">
+    <img style="width: 100%; height: 460px;" src="{{MEDIA_URL}}img/banner4.jpg">
 </div>
 
-<div class="container-fluid pl-0 pr-0 pa" style="right: 0; top: 22%; width: 100%;">
-    <div class="container pr-50 pl-60 pr">
+
+<div class="container-fluid pl-0 pr-0 pa" style="right: 0; top: 140px; width: 100%;">
+    <div class="container pr-50 pl-60 pr" style="">
         <div class="evaluate－cover"></div>
         <div class="evaluate－form">
             <div class="f20">二手车估价</div>
