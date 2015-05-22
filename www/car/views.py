@@ -20,7 +20,11 @@ def car(request, template_name='pc/index.html'):
     years.reverse()
     months = range(1, 13)
 
-    historys = UserUsedCarBase().get_all_user_used_car()[:20]
+    # 滚动20条历史纪录
+    historys = UserUsedCarBase().get_top_20_history()
+
+    # 估车前5 
+    top_5_evaluate_car = UserUsedCarBase().get_top_5_evaluate_car()
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
@@ -85,7 +89,18 @@ def sell_car(request):
     return UserUsedCarBase().sell_car(user_used_car_id, mobile)
 
 
+def get_top_5_evaluate_car(request):
+    data = []
 
+    for x in UserUsedCarBase().get_top_5_evaluate_car():
+        
+        serial = SerialBase().get_serial_by_id(x['car__serial__id'])[0]
+        data.append({
+            'name': serial.name,
+            'count': x['total']
+        })
+
+    return HttpResponse(json.dumps(data))
 
 
 

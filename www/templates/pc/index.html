@@ -10,7 +10,6 @@
     width: 100%;
     height: 100vh;
     position: relative;
-    /*min-height: 600px;*/
 }
 
 .bg-img{
@@ -247,11 +246,11 @@ $(document).ready(function(){
                     '<span class="pl-5 pr-5">'+data.data['serial_name']+'</span>',
                     '<span class="pl-5 pr-5">'+data.data['name']+'</span>',
                     '<br>评估价为:',
-                    '<span class="co-66afe9 pl-15 pr-5"><i class="fa fa-rmb"></i>'+data.data['price']+' 万</span>'
+                    (data.data['price'] != "0.0") ? ('<span class="co-66afe9 pl-15 pr-5"><i class="fa fa-rmb pr-5"></i>'+data.data['price']+' 万</span>') : '<span class="pl-5 co-66afe9">暂无报价</span>'
                 ].join(''));
 
                 $('.info-desc').html([
-                    '<span>'+data.data['license_time']+'上牌，'+data.data['trip_distance']+'万公里，新车指导价 <i class="fa fa-rmb"></i>'+data.data['original_price']+' 万</span>'
+                    '<span>'+data.data['license_time']+'上牌，'+data.data['trip_distance']+'万公里，新车指导价 <i class="fa fa-rmb pr-3"></i>'+data.data['original_price']+' 万</span>'
                 ].join(''));
 
                 $('.car-img').attr('src', data.data['img']);
@@ -288,7 +287,7 @@ $(document).ready(function(){
                                         '<input class="form-control tel" placeholder="" />',
                                     '</div>',
                                     '<div class="col-md-3">',
-                                        '<a href="#" style="border-radius: 0;" class="btn btn-primary btn-block btn-sell">提交</a>',
+                                        '<a href="#" id="sell_car_btn" style="border-radius: 0;" class="btn btn-primary btn-block btn-sell">提交</a>',
                                     '</div>',
                                 '</div>',
                             '</div>',
@@ -311,6 +310,7 @@ $(document).ready(function(){
                 return false;
             }
             
+            g_ajax_processing_obj_id = "sell_car_btn";
             ajaxSend(
                 '/car/sell_car', 
                 {'user_used_car_id': $('#user_used_car_id').val(), 'mobile': tel},
@@ -414,27 +414,8 @@ $(document).ready(function(){
             </div>
             <div class="mt-15 f14 scroll-list">
                 {% for history in historys %}
-                <div class="pb-5">{{history.car.serial.name}} {{history.car.name}} 估价 {{history.price}} 万</div>
+                <div class="pb-5">{{history.car.serial.name}} {{history.car.name}} 估价 <span class="fi fb">{{history.price}}</span> 万</div>
                 {% endfor %}
-                <!-- <div class="pb-5">朗逸爱车估价 10.53万</div>
-                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
-                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
-                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
-                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
-                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
-                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div>
-                <div class="pb-5">比亚迪F3爱车估价 5.40万</div>
-                <div class="pb-5">奥迪A6L2014款奥迪A6LTFSI舒适型估价 30.08万</div>
-                <div class="pb-5">宝马1系2013款125i运动型估价 28.8万</div>
-                <div class="pb-5">保时捷911 2014款Turbo估价 131.2万</div>
-                <div class="pb-5">比亚迪F3 2014款1.5L自动尊贵估价 131.2万</div>
-                <div class="pb-5">长城精灵2009款CROSS1.3L豪华估价 131.2万</div>
-                <div class="pb-5">长安之星S460爱车估价 1.51万</div>
-                <div class="pb-5">朗逸爱车估价 10.53万</div> -->
             </div>
         </div>
     </div>
@@ -463,31 +444,13 @@ $(document).ready(function(){
         <div class="col-md-4 pr-50">
             <div class="pt-50 f16">大家都在估什么车</div>
             <ul class="list-group">
+                {% for x in top_5_evaluate_car %}
                 <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #428BCA; padding: 2px; color: #fff">01</span>
-                    <span class="pl-5">大众POLO</span>
-                    <span class="pull-right co-bbbbbb">54213</span>
+                    <span style="background-color: #428BCA; padding: 2px; color: #fff"> 0{{ forloop.counter }}</span>
+                    <span class="pl-5">{{x.car__serial__name}}</span>
+                    <span class="pull-right co-bbbbbb">{{x.total}}</span>
                 </li>
-                <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #428BCA; padding: 2px; color: #fff">02</span>
-                    <span class="pl-5">奥迪A4</span>
-                    <span class="pull-right co-bbbbbb">43453</span>
-                </li>
-                <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #428BCA; padding: 2px; color: #fff">03</span>
-                    <span class="pl-5">雅阁</span>
-                    <span class="pull-right co-bbbbbb">32421</span>
-                </li>
-                <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #428BCA; padding: 2px; color: #fff">04</span>
-                    <span class="pl-5">宝马3系</span>
-                    <span class="pull-right co-bbbbbb">23453</span>
-                </li>
-                <li class="list-group-item pl-5 pr-5">
-                    <span style="background-color: #428BCA; padding: 2px; color: #fff">05</span>
-                    <span class="pl-5">奔驰E300</span>
-                    <span class="pull-right co-bbbbbb">14323</span>
-                </li>
+                {% endfor %}
             </ul>
         </div>
 
@@ -554,7 +517,7 @@ $(document).ready(function(){
                 <li class="list-group-item">
                     <div class="pl-70 pr">
                         <img class="pa" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god.png?t=2">
-                        <a class="pa f13" style="top: 5px; right: 0;" href="http://wpa.qq.com/msgrd?v=3&amp;uin=286394973&amp;site=qq&amp;menu=yes" target="_blank">
+                        <a class="pa f13" style="top: 5px; right: 0;" href="http://wpa.qq.com/msgrd?v=3&amp;uin=200581107&amp;site=qq&amp;menu=yes" target="_blank">
                             <i class="fa fa-qq"></i>咨询车神
                         </a>
                         <div class="f16 pt-5">王撕葱</div>
@@ -564,7 +527,7 @@ $(document).ready(function(){
                 <li class="list-group-item">
                     <div class="pl-70 pr">
                         <img class="pa" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god2.png?t=2">
-                        <a class="pa f13" style="top: 5px; right: 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=286394973&amp;site=qq&amp;menu=yes">
+                        <a class="pa f13" style="top: 5px; right: 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=200581107&amp;site=qq&amp;menu=yes">
                             <i class="fa fa-qq"></i>咨询车神
                         </a>
                         <div class="f16 pt-5">聪哥</div>
@@ -574,7 +537,7 @@ $(document).ready(function(){
                 <li class="list-group-item">
                     <div class="pl-70 pr">
                         <img class="pa f13" style="left: 0; top: 0;" src="http://assets.souche.com/assets/images/judge/car-god3.png?t=2">
-                        <a class="pa f13" style="top: 5px; right: 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=286394973&amp;site=qq&amp;menu=yes">
+                        <a class="pa f13" style="top: 5px; right: 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=200581107&amp;site=qq&amp;menu=yes">
                             <i class="fa fa-qq"></i>咨询车神
                         </a>
                         <div class="f16 pt-5">暮雨</div>
