@@ -105,7 +105,7 @@ $(document).ready(function(){
 
             return group;
         };
-
+    $('input, textarea').placeholder();
     selBrand.on('change', function(value){
         if(!value){
             return;
@@ -257,7 +257,7 @@ $(document).ready(function(){
                 $('.evaluate-result').prev().prev().addClass('none');
                 $('.evaluate-result').removeClass('none');
                 // $('body').scrollTop(5000);
-                $('body').animate({'scrollTop': 600}, 500);
+                $('html,body').animate({'scrollTop': 600}, 500);
             }
         );
         
