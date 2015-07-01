@@ -91,6 +91,7 @@ a:focus {outline: none;-moz-outline: none;}
 .pl-10{padding-left: 10px;}
 .pl-15{padding-left: 15px;}
 .pl-22{padding-left: 22px;}
+.pl-25{padding-left: 25px;}
 .pl-60{padding-left: 60px;}
 .pl-70{padding-left: 70px;}
 .pl-160{padding-left: 160px;}
@@ -109,11 +110,13 @@ a:focus {outline: none;-moz-outline: none;}
 .pr-6{padding-right: 6px;}
 .pr-8{padding-right: 8px;}
 .pr-10{padding-right: 10px;}
+.pr-25{padding-right: 25px;}
 .pr-50{padding-right: 50px;}
 
 .mr-0{margin-right: 0;}
 .ml-0{margin-left: 0;}
 .mb-20{margin-bottom: 20px;}
+.mt--5{margin-top: -5px;}
 .mt-10{margin-top: 10px;}
 .mt-15{margin-top: 15px;}
 

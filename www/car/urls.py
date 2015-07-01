@@ -8,4 +8,7 @@ urlpatterns = patterns('www.car.views',
                        url(r'^evaluate_price$', 'evaluate_price'),
                        url(r'^sell_car$', 'sell_car'),
                        url(r'^get_top_5_evaluate_car$', 'get_top_5_evaluate_car'),
+
+                       url(r'^weixin/sell_car$', 'w_sell_car'),
+                       url(r'^weixin/buy_car$', 'w_buy_car'),
                        )

@@ -103,11 +103,14 @@ def get_top_5_evaluate_car(request):
     return HttpResponse(json.dumps(data))
 
 
+def w_sell_car(request, template_name='mobile/sell_car.html'):
+
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
+def w_buy_car(request, template_name='mobile/buy_car.html'):
 
-
-
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
 
