@@ -3,6 +3,7 @@
 {% block title_all %}安心买车 - 巴适二手车{% endblock %}
 
 {% block base_css %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/animate/animate.min.css" />
 <style type="text/css">
 .co-6F200A{color: #6F200A;}
 .co-6F200A{color: #6F200A;}
@@ -20,10 +21,63 @@
 	background-color: #AFFCF4;
 }
 .bg3{background-color: #F4653A;}
+.delay-1{
+	-webkit-animation-delay: 0.3s;
+	   -moz-animation-delay: 0.3s;
+	    -ms-animation-delay: 0.3s;
+	     -o-animation-delay: 0.3s;
+			animation-delay: 0.3s;
+}
+.delay-2{
+	-webkit-animation-delay: 0.6s;
+	   -moz-animation-delay: 0.6s;
+	    -ms-animation-delay: 0.6s;
+	     -o-animation-delay: 0.6s;
+			animation-delay: 0.6s;
+}
+.delay-3{
+	-webkit-animation-delay: 0.9s;
+	   -moz-animation-delay: 0.9s;
+	    -ms-animation-delay: 0.9s;
+	     -o-animation-delay: 0.9s;
+			animation-delay: 0.9s;
+}
 </style>
 {% endblock %}
 
 {% block base_js %}
+<script type="text/javascript" src="{{MEDIA_URL}}js/backbone/underscore-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(window).scroll(
+        _.throttle(function(){
+
+            var me = $(this),
+            	windowHeight = me.height(),
+            	scrollTop = me.scrollTop();
+
+            if((windowHeight + scrollTop + 150) > $('.an1').offset().top && !$('.an1').hasClass('pulse')){
+            	window.setTimeout(function(){
+	            	$('.an1').addClass('pulse');
+	            }, 150);
+            }
+            if((windowHeight + scrollTop + 150) > $('.an2').offset().top && !$('.an2').hasClass('flash')){
+            	window.setTimeout(function(){
+            		$('.an2').addClass('flash');
+            	}, 800);
+            }
+            // if((windowHeight + scrollTop + 150) > $('.an3').offset().top && !$('.an3').hasClass('fadeInUp')){
+            // 	window.setTimeout(function(){
+            // 		$('.an3').addClass('fadeInUp');
+            // 	}, 1500);
+            // }
+
+        }, 300)
+    );
+
+});
+</script>
 {% endblock %}
 
 {% block base_container %}
@@ -45,7 +99,7 @@
 	</div>
 </div>
 <div class="row pt-20 pb-20">
-	<div class="col-xs-8 pl-5 pr-0">
+	<div class="col-xs-8 pl-5 pr-0 animated fadeInUp">
 		<div class="col-xs-6">
 			<img class="w" src="{{MEDIA_URL}}img/weixin/buy/pic5.png">
 		</div>
@@ -56,7 +110,7 @@
 	</div>
 </div>
 <div class="row pt-20 pb-20">
-	<div class="col-xs-8 pl-5 pr-0">
+	<div class="col-xs-8 pl-5 pr-0 animated fadeInUp delay-1">
 		<div class="col-xs-6">
 			<img class="w" src="{{MEDIA_URL}}img/weixin/buy/pic7.png">
 		</div>
@@ -67,7 +121,7 @@
 	</div>
 </div>
 <div class="row pt-20 pb-20">
-	<div class="col-xs-8 pl-5 pr-0">
+	<div class="col-xs-8 pl-5 pr-0 animated fadeInUp delay-2">
 		<div class="col-xs-6">
 			<img class="w" src="{{MEDIA_URL}}img/weixin/buy/pic9.png">
 		</div>
@@ -78,7 +132,7 @@
 	</div>
 </div>
 <div class="row pt-20 pb-20">
-	<div class="col-xs-8 pl-5 pr-0">
+	<div class="col-xs-8 pl-5 pr-0 animated fadeInUp delay-3">
 		<div class="col-xs-6">
 			<img class="w" src="{{MEDIA_URL}}img/weixin/buy/pic11.png">
 		</div>
@@ -110,12 +164,12 @@
 </div>
 <div class="row pt-45 pb-20">
 	<div class="col-xs-10 col-xs-offset-1 pl-25 pr-25">
-		<img class="w" src="{{MEDIA_URL}}img/weixin/sell/pic29.png">
+		<img class="w animated an1" src="{{MEDIA_URL}}img/weixin/sell/pic29.png">
 	</div>
 	<div class="col-xs-10 col-xs-offset-1 pl-25 pr-25 pt-30">
-		<img class="w" src="{{MEDIA_URL}}img/weixin/sell/pic30.png">
+		<img class="w animated an2" src="{{MEDIA_URL}}img/weixin/sell/pic30.png">
 	</div>
-	<div class="col-xs-12 text-center co-6C6C6C pt-45 pl-0 pr-0">
+	<div class="col-xs-12 text-center co-6C6C6C pt-45 pl-0 pr-0 animated an3">
 		<p>一群懂车爱车且有理想的年轻人，</p>
 		<p>集结了一帮在二手车领域摸爬滚打数十载的牛人，</p>
 		<p>他们是高级评估师，二手车交易师，高级维修师。 </p>
