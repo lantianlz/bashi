@@ -147,7 +147,7 @@
                     offsetHeight = borderHeight - imgHeight,
                     offsetHeight = (offsetHeight >= 0) ? offsetHeight / 2 : 0;
 
-                $('target-img').style.top = offsetHeight;
+                $('target-img').style.top = offsetHeight + "px";
             };
             reader.readAsDataURL(this.files[0]);
 
