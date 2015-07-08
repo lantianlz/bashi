@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>郭敬明电影主角大海选</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <style type="text/css">
+    body,html{
+        width: 100%;
+        height: 100%;
+    	margin: 0 auto;
+        overflow-x: hidden;
+    }
+
+    #test-page{
+        display: block;
+        height: 100%;
+        background-image: url('{{MEDIA_URL}}img/yanzhi/test-bg.jpg');
+        background-repeat: no-repeat;
+        background-color: #000000;
+        background-size: 100%;
+        background-position: 50%;
+    }
+    .info{
+        color: #ffffff;
+        font-size: 18px;
+        padding-top: 25%;
+        text-align: center;
+        line-height: 30px;
+    }
+    #target-file{
+        width: 100%;
+        height: 50%;
+        opacity: 0;
+    }
+
+    #result-page{
+        display: none;
+        height: 100%;
+        background-color: #000000;
+    }
+    #target-img{
+        width: 40%;
+        left: 30%;
+        top: 3%;
+        display: block;
+        position: absolute;
+        z-index: 1;
+    }
+    .bg1{
+        width: 200%;
+        margin-left: -50%;
+    }
+    .bg2{
+        position: relative;
+        width: 100%;
+        z-index: 2;
+    }
+    .bg3{
+        width: 150%;
+    }
+    #img-border{
+        position: relative;
+        overflow: hidden;
+        margin-top: -25%;
+    }
+    .oh{
+        overflow-x: hidden;
+    }
+    .pr{
+        position: relative;
+        overflow: hidden;
+    }
+    .result{
+        position: absolute;
+        left: 0;
+        top: 10%;
+        width: 100%;
+        text-align: center;
+    }
+    #result-point{
+        color: red;
+        font-size: 26px;
+        -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+        -webkit-transform: translateY(200%);
+                transform: translateY(200%);
+    }
+    #point{
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    #result-info{
+        color: #dfdfdf;
+        font-size: 20px;
+        line-height: 30px;
+        padding: 20px;
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+                transform: translateY(100%);
+        -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+    }
+    .btn-border{
+        text-align: center;
+        background-color: #000000;
+        padding-top: 3%;
+        padding-bottom: 5%;
+    }
+    #btn{
+        width: 80%;
+    }
+    </style>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/jquery/countUp.min.js"></script>
+    <script type="text/javascript">
+    var $ = function(id){
+            return document.getElementById(id);
+        },
+        RESULTS = {
+            '0':"你简直就是御姐女神！浑身散发着女王气质，顾里在你面前瞬间变成女屌丝一枚",
+            '1':"经系统鉴定，你就是小萝莉一枚，外表正经的你掩饰不了一颗逗比搞怪的心",
+            '2':"经系统鉴定，你就是女屌丝一枚，呵呵，别以为我们不知道你在想什么",
+            '3':"很遗憾的通知你，我们发现你的脸很大，不过脸大的人有福气哦",
+            '4':"很遗憾的通知你，我们发现你的眼睛太小，不过眼睛小，沙子才吹不进来哦",
+            '5':"很遗憾的通知你，我们发现你有一颗玻璃心，很容易就悲伤发火抑郁失眠",
+            '6':"一看你的脸就是吃货，鉴定完毕，不服再测",
+            '7':"看你的脸就是逗b，鉴定完毕，不服来测"
+        };
+
+    window.onload = function(){
+        // 文件框选择事件
+        $('target-file').onchange = function(){
+
+            // 处理图片
+            var reader = new FileReader();
+            reader.onload = function() {
+                $("target-img").src = this.result;
+
+                // 计算位置
+                var borderHeight = $('img-border').offsetHeight,
+                    imgHeight = $('target-img').offsetHeight,
+                    offsetHeight = borderHeight - imgHeight,
+                    offsetHeight = (offsetHeight >= 0) ? offsetHeight / 2 : 0;
+
+                $('target-img').style.top = offsetHeight;
+            };
+            reader.readAsDataURL(this.files[0]);
+
+            // 处理结果
+            // 将分数控制在 60 - 100 之间
+            var point = Math.floor(Math.random()*4000) / 100 + 60,
+                resultNo = 0;
+
+            // 计算结果
+            if (60 <= point && point < 65) {
+                resultNo = 7;
+            } else if (65 <= point && point < 70) {
+                resultNo = 6;
+            } else if (70 <= point && point < 75) {
+                resultNo = 5;
+            } else if (75 <= point && point < 80) {
+                resultNo = 4;
+            } else if (80 <= point && point < 85) {
+                resultNo = 3;
+            } else if (85 <= point && point < 90) {
+                resultNo = 2;
+            } else if (90 <= point && point < 95) {
+                resultNo = 1;
+            } else if (95 <= point) {
+                resultNo = 0;
+            }
+            
+            // 将结果显示到页面
+            new CountUp("point", 0, point, 2).start();
+            $('result-info').innerText = RESULTS[resultNo+''];
+            
+            // 动画效果
+            window.setTimeout(function(){
+                $('result-point').style.transform = "translateY(0)";
+                $('result-point').style.webkitTransform = "translateY(0)";
+                $('result-info').style.opacity = 1;
+                $('result-info').style.transform = "translateY(0)";
+                $('result-info').style.webkitTransform = "translateY(0)";
+            }, 2000);
+
+            // 控制页面切换
+            $('test-page').style.display = "none";
+            $('result-page').style.display = "block";
+        };
+
+        // 再次测试
+        $('btn').onclick = function(){
+            window.location.href = window.location.href;
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="test-page">
+        <div class="info">
+        上传图片检测青春资格
+        <br />
+        长得好看又有钱的人才有青春
+        </div>
+        <input type="file" id="target-file" />
+    </div>
+    <div id="result-page">
+        <div class="oh">
+            <img class="bg1" src="{{MEDIA_URL}}img/yanzhi/result-bg1.jpg" />
+        </div>
+        <div id="img-border">
+            <img id="target-img" src="{{MEDIA_URL}}img/yanzhi/girl.jpg" />
+            <img class="bg2" src="{{MEDIA_URL}}img/yanzhi/result-bg2.png" />
+        </div>
+        <div class="pr oh">
+            <img class="bg3" src="{{MEDIA_URL}}img/yanzhi/result-bg3.jpg" />
+            <div class="result">
+                <div id="result-point">
+                    青春指数<span id="point"></span>分!
+                </div>
+                <div id="result-info"></div>
+            </div>
+        </div>
+        <div class="btn-border">
+            <img id="btn" src="{{MEDIA_URL}}img/yanzhi/btn.png" >
+        </div>
+    </div>
+    
+    {% include "_tongji.html" %}
+    
+</body>
+</html>
